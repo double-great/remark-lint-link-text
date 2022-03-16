@@ -2,7 +2,7 @@
 
 import { remark } from "remark";
 import dedent from "dedent";
-import plugin from ".";
+import plugin from "./dist";
 import banned from "./banned.json";
 
 const processMarkdown = (markdown, opts) => {
