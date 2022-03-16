@@ -25,7 +25,7 @@ type textNode = {
 const checkLinkText = lintRule(
   "remark-lint:link-text",
   (tree: Node, file: VFile): void => {
-    const textToNodes: { [alt: string]: textNode[] } = {};
+    const textToNodes: { [text: string]: textNode[] } = {};
 
     const aggregate = (node: textNode) => {
       const text = node.children.reduce((str, arr) => {
