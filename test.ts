@@ -5,7 +5,7 @@ import dedent from "dedent";
 import plugin from ".";
 import banned from "./banned.json";
 
-const processMarkdown = (markdown, opts) => {
+const processMarkdown = (markdown: string, opts?) => {
   return remark().use(plugin, opts).process(markdown);
 };
 
