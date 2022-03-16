@@ -3,35 +3,16 @@ import { VFile, Node } from "unified-lint-rule/lib";
 import { visit } from "unist-util-visit";
 import banned from "./banned.json";
 
-const starts = ["this", "the"];
-const bannedRegex = banned.reduce((arr: string[], b: string) => {
-  starts.forEach((s) => {
-    const trimmed = b.replace(s, "").trim();
-    if (b.startsWith(s) && arr.indexOf(trimmed) === -1)
-      arr.push(`${s}\\s(.*?)\\s${trimmed}\\b$`);
-  });
-  return arr;
-}, []);
-
-type textNode = {
-  type: string;
-  title: string | null;
-  url: string;
-  value: string | undefined;
-  position: string[];
-  children: textNode[];
-};
-
 const checkLinkText = lintRule(
   "remark-lint:link-text",
   (tree: Node, file: VFile): void => {
-    const textToNodes: { [text: string]: textNode[] } = {};
+    const textToNodes: { [text: string]: TextNode[] } = {};
 
-    const aggregate = (node: textNode) => {
-      const text = node.children.reduce((str, arr) => {
-        if (arr.type == "text") str += arr.value;
-        return str;
-      }, "");
+    const aggregate = (node: TextNode) => {
+      const text = node.children
+        .filter(({ type }) => type === "text")
+        .map(({ value }) => value)
+        .join(" ");
 
       if (!text) return;
 
@@ -49,32 +30,59 @@ const checkLinkText = lintRule(
       if (!nodes) return;
 
       // test regex
-      starts.forEach((start) => {
-        if (txt.toLowerCase().startsWith(start)) {
-          bannedRegex.forEach((reg) => {
-            if (new RegExp(`${reg}`, "i").test(txt)) {
-              for (const node of nodes) {
-                file.message(
-                  `Replace "${txt}" with descriptive link text that details the destination.`,
-                  node
-                );
-              }
-            }
-          });
-        }
-      });
+      checkRegexBannedWords(file, nodes, txt);
 
       // test banned words
-      if (banned.includes(txt.toLowerCase())) {
-        for (const node of nodes) {
-          file.message(
-            `Replace "${txt}" with descriptive link text that details the destination.`,
-            node
-          );
-        }
-      }
+      checkBannedWords(file, nodes, txt);
     }
   }
 );
 
 export default checkLinkText;
+
+function checkRegexBannedWords(file: VFile, nodes: TextNode[], text: string) {
+  for (const start of starts) {
+    if (!text.toLowerCase().startsWith(start)) continue;
+    for (const regex of bannedRegex) {
+      if (new RegExp(`${regex}`, "i").test(text)) {
+        for (const node of nodes) {
+          createMessage(file, node, text);
+        }
+      }
+    }
+  }
+}
+
+function checkBannedWords(file: VFile, nodes: TextNode[], text: string) {
+  if (banned.includes(text.toLowerCase())) {
+    for (const node of nodes) {
+      createMessage(file, node, text);
+    }
+  }
+}
+
+function createMessage(file: VFile, node: TextNode, text: string) {
+  file.message(
+    `Replace "${text}" with descriptive link text that details the destination.`,
+    node
+  );
+}
+
+type TextNode = {
+  type: string;
+  title: string | null;
+  url: string;
+  value: string | undefined;
+  position: string[];
+  children: TextNode[];
+};
+
+const starts = ["this", "the"];
+const bannedRegex = banned.reduce((arr: string[], b: string) => {
+  for (const s of starts) {
+    const trimmed = b.replace(s, "").trim();
+    if (b.startsWith(s) && !arr.includes(trimmed))
+      arr.push(`${s}\\s(.*?)\\s${trimmed}\\b$`);
+  }
+  return arr;
+}, []);
