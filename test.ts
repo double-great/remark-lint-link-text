@@ -3,27 +3,10 @@
 import { remark } from "remark";
 import dedent from "dedent";
 import plugin from ".";
-import banned from "./banned.json";
 
 const processMarkdown = (markdown: string, opts?) => {
   return remark().use(plugin, opts).process(markdown);
 };
-
-describe("banned.json", () => {
-  test(`banned.json is an array`, () => {
-    expect(typeof banned).toBe("object");
-    expect(banned.length).toBeGreaterThan(0);
-  });
-
-  banned.forEach((phrase) => {
-    test(`"${phrase}" is a string`, () => {
-      expect(typeof phrase).toBe("string");
-    });
-    test(`"${phrase}" is lowercase`, () => {
-      expect(phrase.toLowerCase()).toEqual(phrase);
-    });
-  });
-});
 
 describe("remark-lint-link-text", () => {
   test("no errors when no links present", () => {

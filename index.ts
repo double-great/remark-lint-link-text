@@ -1,13 +1,12 @@
 import { lintRule } from "unified-lint-rule";
 import { VFile, Node } from "unified-lint-rule/lib";
 import { visit } from "unist-util-visit";
-import banned from "./banned.json";
+import banned from "./banned.js";
 
 const checkLinkText = lintRule(
   "remark-lint:link-text",
   (tree: Node, file: VFile): void => {
     const textToNodes: { [text: string]: TextNode[] } = {};
-
     const aggregate = (node: TextNode) => {
       const text = node.children
         .filter(({ type }) => type === "text")

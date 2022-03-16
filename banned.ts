@@ -1,4 +1,4 @@
-[
+const banned: string[] = [
   "click here",
   "here",
   "read more",
@@ -23,5 +23,7 @@
   "the page",
   "the site",
   "the website",
-  "the document"
-]
+  "the document",
+];
+
+export default banned;
