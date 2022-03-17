@@ -3,3 +3,4 @@ babel.config.cjs
 .eslintrc.cjs
 .github
 test.ts
+.husky
