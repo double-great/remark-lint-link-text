@@ -4,3 +4,5 @@ babel.config.cjs
 .github
 test.ts
 .husky
+index.ts
+banned.ts
