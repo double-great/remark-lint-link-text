@@ -2,7 +2,7 @@
 
 A remark-lint plugin that warns against non-descriptive link text.
 
-```
+```md
 ✅ Visit [Mapbox documentation](https://docs.mapbox.com) to learn more.
 🚫 Learn more [here](https://docs.mapbox.com).
 ```
@@ -29,7 +29,7 @@ npm install --save-dev remark-cli @double-great/remark-lint-link-text
 
 In `package.json`:
 
-```
+```json
 "scripts": {
   "lint-md": "remark src/pages/"
 },
@@ -42,7 +42,7 @@ In `package.json`:
 
 If you do not want the linter to fail, but only give warnings:
 
-```
+```json
 "remarkConfig": {
   "plugins": [
     "@double-great/remark-lint-link-text"
