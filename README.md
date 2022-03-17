@@ -17,7 +17,7 @@ The linter warns against:
 - this article
 - this [whatever words in between] article
 
-And [several others](banned.json).
+And [several others](src/banned.ts).
 
 💡 For all banned phrases that begin with `this` or `the`, any words that come between will also fail. For example "this post", "this Mapbox post", and "this Mapbox blog post" will all fail.
 
@@ -27,20 +27,7 @@ And [several others](banned.json).
 npm install --save-dev remark-cli @double-great/remark-lint-link-text
 ```
 
-In `package.json`:
-
-```json
-"scripts": {
-  "lint-md": "remark src/pages/"
-},
-"remarkConfig": {
-  "plugins": [
-    ["@double-great/remark-lint-link-text", [2]]
-  ]
-},
-```
-
-If you do not want the linter to fail, but only give warnings:
+Add the plugin to your remark configuration:
 
 ```json
 "remarkConfig": {
@@ -52,7 +39,7 @@ If you do not want the linter to fail, but only give warnings:
 
 ## Banned link text
 
-Save banned link text in [banned.json](banned.json).
+Save banned link text in [src/banned.ts](src/banned.ts).
 
 ## Proper link text guidelines
 
