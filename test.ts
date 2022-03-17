@@ -1,5 +1,3 @@
-"use strict";
-
 import { remark } from "remark";
 import dedent from "dedent";
 import plugin from ".";
