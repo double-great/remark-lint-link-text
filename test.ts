@@ -30,8 +30,8 @@ describe("remark-lint-link-text", () => {
     );
 
     expect(lint.messages.length).toEqual(1);
-    expect(lint.messages[0].reason).toBe(
-      'Replace "click here" with descriptive link text that details the destination.'
+    expect(lint.messages[0].reason).toMatchInlineSnapshot(
+      `"Replace \\"click here\\" with descriptive link text that details the destination."`
     );
   });
 
@@ -45,8 +45,8 @@ describe("remark-lint-link-text", () => {
     );
 
     expect(lint.messages.length).toEqual(1);
-    expect(lint.messages[0].reason).toBe(
-      'Replace "Click here" with descriptive link text that details the destination.'
+    expect(lint.messages[0].reason).toMatchInlineSnapshot(
+      `"Replace \\"Click here\\" with descriptive link text that details the destination."`
     );
   });
 
@@ -87,20 +87,20 @@ describe("remark-lint-link-text", () => {
     );
 
     expect(lint.messages.length).toEqual(5);
-    expect(lint.messages[0].reason).toBe(
-      'Replace "this mapbox article" with descriptive link text that details the destination.'
+    expect(lint.messages[0].reason).toMatchInlineSnapshot(
+      `"Replace \\"this mapbox article\\" with descriptive link text that details the destination."`
     );
-    expect(lint.messages[1].reason).toBe(
-      'Replace "this Mapbox article" with descriptive link text that details the destination.'
+    expect(lint.messages[1].reason).toMatchInlineSnapshot(
+      `"Replace \\"this Mapbox article\\" with descriptive link text that details the destination."`
     );
-    expect(lint.messages[2].reason).toBe(
-      'Replace "this article" with descriptive link text that details the destination.'
+    expect(lint.messages[2].reason).toMatchInlineSnapshot(
+      `"Replace \\"this article\\" with descriptive link text that details the destination."`
     );
-    expect(lint.messages[3].reason).toBe(
-      'Replace "this blog post" with descriptive link text that details the destination.'
+    expect(lint.messages[3].reason).toMatchInlineSnapshot(
+      `"Replace \\"this blog post\\" with descriptive link text that details the destination."`
     );
-    expect(lint.messages[4].reason).toBe(
-      'Replace "the Mapbox blog post" with descriptive link text that details the destination.'
+    expect(lint.messages[4].reason).toMatchInlineSnapshot(
+      `"Replace \\"the Mapbox blog post\\" with descriptive link text that details the destination."`
     );
   });
 });
