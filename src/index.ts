@@ -27,12 +27,13 @@ const checkLinkText = lintRule(
     for (const txt of Object.keys(textToNodes)) {
       const nodes = textToNodes[txt];
       if (!nodes) return;
-
       // test regex
       checkRegexBannedWords(file, nodes, txt);
 
       // test banned words
       checkBannedWords(file, nodes, txt);
+
+      checkUniqueLinkText(file, nodes, txt);
     }
   }
 );
@@ -56,6 +57,18 @@ function checkBannedWords(file: VFile, nodes: TextNode[], text: string) {
   if (banned.includes(text.toLowerCase())) {
     for (const node of nodes) {
       createMessage(file, node, text);
+    }
+  }
+}
+
+function checkUniqueLinkText(file: VFile, nodes: TextNode[], text: string) {
+  const urls = [...new Set(nodes.map((node) => node.url))];
+  if (urls.length > 1) {
+    for (const node of nodes) {
+      file.message(
+        `The link text "${text}" is used more than once with different URLs. Change the link text to be unique to the URL.`,
+        node
+      );
     }
   }
 }
