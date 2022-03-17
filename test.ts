@@ -1,3 +1,5 @@
+"use strict";
+
 import { remark } from "remark";
 import dedent from "dedent";
 import plugin from ".";
@@ -7,19 +9,17 @@ const processMarkdown = (markdown: string, opts?) => {
 };
 
 describe("remark-lint-link-text", () => {
-  test("no errors when no links present", () => {
-    const lint = processMarkdown(dedent`
+  test("no errors when no links present", async () => {
+    const lint = await processMarkdown(dedent`
       # Title
 
       No URLs in here.
     `);
-    return lint.then((vFile) => {
-      expect(vFile.messages.length).toBe(0);
-    });
+    expect(lint.messages.length).toEqual(0);
   });
 
-  test("warns against banned link text", () => {
-    const lint = processMarkdown(
+  test("warns against banned link text", async () => {
+    const lint = await processMarkdown(
       dedent`
       # Title
 
@@ -29,16 +29,14 @@ describe("remark-lint-link-text", () => {
     `
     );
 
-    return lint.then((vFile) => {
-      expect(vFile.messages.length).toBe(1);
-      expect(vFile.messages[0].reason).toBe(
-        'Replace "click here" with descriptive link text that details the destination.'
-      );
-    });
+    expect(lint.messages.length).toEqual(1);
+    expect(lint.messages[0].reason).toBe(
+      'Replace "click here" with descriptive link text that details the destination.'
+    );
   });
 
-  test("warns against banned link text, case insensitve", () => {
-    const lint = processMarkdown(
+  test("warns against banned link text, case insensitve", async () => {
+    const lint = await processMarkdown(
       dedent`
       # Title
 
@@ -46,16 +44,14 @@ describe("remark-lint-link-text", () => {
     `
     );
 
-    return lint.then((vFile) => {
-      expect(vFile.messages.length).toBe(1);
-      expect(vFile.messages[0].reason).toBe(
-        'Replace "Click here" with descriptive link text that details the destination.'
-      );
-    });
+    expect(lint.messages.length).toEqual(1);
+    expect(lint.messages[0].reason).toBe(
+      'Replace "Click here" with descriptive link text that details the destination.'
+    );
   });
 
-  test("the...documentation should pass", () => {
-    const lint = processMarkdown(
+  test("the...documentation should pass", async () => {
+    const lint = await processMarkdown(
       dedent`
       # Title
 
@@ -63,27 +59,22 @@ describe("remark-lint-link-text", () => {
     `
     );
 
-    return lint.then((vFile) => {
-      expect(vFile.messages.length).toBe(0);
-    });
+    expect(lint.messages.length).toEqual(0);
   });
 
-  test("should pass", () => {
-    const lint = processMarkdown(
+  test("should pass", async () => {
+    const lint = await processMarkdown(
       dedent`
       ## Option 1: Choropleth
       
       In this option, we will create a choropleth visualization using data from [The Washington Post's "2ºC: Beyond the Limit" series about rising temperatures](https://github.com/washingtonpost/data-2C-beyond-the-limit-usa), which analyzes warming temperatures in the United States.
     `
     );
-
-    return lint.then((vFile) => {
-      expect(vFile.messages.length).toBe(0);
-    });
+    expect(lint.messages.length).toEqual(0);
   });
 
-  test("warns against banned link text, regex match", () => {
-    const lint = processMarkdown(
+  test("warns against banned link text, regex match", async () => {
+    const lint = await processMarkdown(
       dedent`
       # Title
 
@@ -95,23 +86,21 @@ describe("remark-lint-link-text", () => {
     `
     );
 
-    return lint.then((vFile) => {
-      expect(vFile.messages.length).toBe(5);
-      expect(vFile.messages[0].reason).toBe(
-        'Replace "this mapbox article" with descriptive link text that details the destination.'
-      );
-      expect(vFile.messages[1].reason).toBe(
-        'Replace "this Mapbox article" with descriptive link text that details the destination.'
-      );
-      expect(vFile.messages[2].reason).toBe(
-        'Replace "this article" with descriptive link text that details the destination.'
-      );
-      expect(vFile.messages[3].reason).toBe(
-        'Replace "this blog post" with descriptive link text that details the destination.'
-      );
-      expect(vFile.messages[4].reason).toBe(
-        'Replace "the Mapbox blog post" with descriptive link text that details the destination.'
-      );
-    });
+    expect(lint.messages.length).toEqual(5);
+    expect(lint.messages[0].reason).toBe(
+      'Replace "this mapbox article" with descriptive link text that details the destination.'
+    );
+    expect(lint.messages[1].reason).toBe(
+      'Replace "this Mapbox article" with descriptive link text that details the destination.'
+    );
+    expect(lint.messages[2].reason).toBe(
+      'Replace "this article" with descriptive link text that details the destination.'
+    );
+    expect(lint.messages[3].reason).toBe(
+      'Replace "this blog post" with descriptive link text that details the destination.'
+    );
+    expect(lint.messages[4].reason).toBe(
+      'Replace "the Mapbox blog post" with descriptive link text that details the destination.'
+    );
   });
 });
