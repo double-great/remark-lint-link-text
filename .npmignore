@@ -2,7 +2,6 @@ tsconfig.json
 babel.config.cjs
 .eslintrc.cjs
 .github
-test.ts
+__tests__
 .husky
-index.ts
-banned.ts
+src

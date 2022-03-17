@@ -58,7 +58,7 @@
       "!node_modules/"
     ],
     "moduleNameMapper": {
-      "^./banned.js$": "<rootDir>/banned.ts"
+      "^./banned.js$": "<rootDir>/src/banned.ts"
     }
   }
 }

@@ -1,6 +1,6 @@
 import { remark } from "remark";
 import dedent from "dedent";
-import plugin from ".";
+import plugin from "../";
 
 const processMarkdown = (markdown: string, opts?) => {
   return remark().use(plugin, opts).process(markdown);
