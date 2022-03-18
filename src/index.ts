@@ -62,8 +62,8 @@ function checkBannedWords(file: VFile, nodes: TextNode[], text: string) {
 }
 
 function checkUniqueLinkText(file: VFile, nodes: TextNode[], text: string) {
-  const urls = [...new Set(nodes.map((node) => node.url))];
-  if (urls.length > 1) {
+  const uniqueUrls = [...new Set(nodes.map(({ url }) => url))];
+  if (uniqueUrls.length > 1) {
     for (const node of nodes) {
       file.message(
         `The link text "${text}" is used more than once with different URLs. Change the link text to be unique to the URL.`,
