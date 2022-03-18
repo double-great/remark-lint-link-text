@@ -32,8 +32,8 @@ describe("remark-lint-link-text", () => {
     expect(lint.messages.length).toEqual(2);
     expect(lint.messages).toMatchInlineSnapshot(`
       Array [
-        [5:13-5:50: Replace “click here” with descriptive link text that details the destination.],
-        [7:13-7:39: Replace “link” with descriptive link text that details the destination.],
+        [5:13-5:50: Avoid using the link text “click here,” it can be confusing when a screen reader reads them out of context. Replace it with a short description of the link’s destination.],
+        [7:13-7:39: Avoid using the link text “link,” it can be confusing when a screen reader reads them out of context. Replace it with a short description of the link’s destination.],
       ]
     `);
   });
@@ -49,7 +49,7 @@ describe("remark-lint-link-text", () => {
 
     expect(lint.messages.length).toEqual(1);
     expect(lint.messages[0].reason).toMatchInlineSnapshot(
-      `"Replace “Click here” with descriptive link text that details the destination."`
+      `"Avoid using the link text “Click here,” it can be confusing when a screen reader reads them out of context. Replace it with a short description of the link’s destination."`
     );
   });
 
@@ -103,19 +103,19 @@ describe("remark-lint-link-text", () => {
 
     expect(lint.messages.length).toEqual(5);
     expect(lint.messages[0].reason).toMatchInlineSnapshot(
-      `"Replace “this mapbox article” with descriptive link text that details the destination."`
+      `"Avoid using the link text “this mapbox article,” it can be confusing when a screen reader reads them out of context. Replace it with a short description of the link’s destination."`
     );
     expect(lint.messages[1].reason).toMatchInlineSnapshot(
-      `"Replace “this Mapbox article” with descriptive link text that details the destination."`
+      `"Avoid using the link text “this Mapbox article,” it can be confusing when a screen reader reads them out of context. Replace it with a short description of the link’s destination."`
     );
     expect(lint.messages[2].reason).toMatchInlineSnapshot(
-      `"Replace “this article” with descriptive link text that details the destination."`
+      `"Avoid using the link text “this article,” it can be confusing when a screen reader reads them out of context. Replace it with a short description of the link’s destination."`
     );
     expect(lint.messages[3].reason).toMatchInlineSnapshot(
-      `"Replace “this blog post” with descriptive link text that details the destination."`
+      `"Avoid using the link text “this blog post,” it can be confusing when a screen reader reads them out of context. Replace it with a short description of the link’s destination."`
     );
     expect(lint.messages[4].reason).toMatchInlineSnapshot(
-      `"Replace “the Mapbox blog post” with descriptive link text that details the destination."`
+      `"Avoid using the link text “the Mapbox blog post,” it can be confusing when a screen reader reads them out of context. Replace it with a short description of the link’s destination."`
     );
   });
 });
