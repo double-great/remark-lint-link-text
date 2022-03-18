@@ -8,6 +8,7 @@ const banned: string[] = [
   "more here",
   "can be found here",
   "found here",
+  "link",
   "this article",
   "this entry",
   "this post",

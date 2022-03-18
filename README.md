@@ -9,13 +9,8 @@ A remark-lint plugin that warns against non-descriptive link text.
 
 The linter warns against:
 
-- click here
-- here
-- read more
-- this link
-- more here
-- this article
-- this [whatever words in between] article
+- contextless phrases such as "click here" and "read more."
+- link text that's used more than once for different URLs.
 - using a URL as the link text.
 
 💡 For all banned phrases that begin with `this` or `the`, any words that come between will also fail. For example "this post", "this Mapbox post", and "this Mapbox blog post" will all fail.

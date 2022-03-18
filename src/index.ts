@@ -27,7 +27,6 @@ const checkLinkText = lintRule(
     for (const txt of Object.keys(textToNodes)) {
       const nodes = textToNodes[txt];
       if (!nodes) return;
-
       // test regex
       checkRegexBannedWords(file, nodes, txt);
 
@@ -35,6 +34,8 @@ const checkLinkText = lintRule(
       checkBannedWords(file, nodes, txt);
 
       checkIsNotUrl(file, nodes, txt);
+
+      checkUniqueLinkText(file, nodes, txt);
     }
   }
 );
@@ -71,6 +72,18 @@ function checkIsNotUrl(file: VFile, nodes: TextNode[], text: string) {
     for (const node of nodes) {
       file.message(
         `Avoid using a URL as the link text “${text}”. Consider users who must speak it out loud and who must listen to a screen reader announce it. Replace it with a short description of the link’s destination.`,
+        node
+      );
+    }
+  }
+}
+
+function checkUniqueLinkText(file: VFile, nodes: TextNode[], text: string) {
+  const uniqueUrls = [...new Set(nodes.map(({ url }) => url))];
+  if (uniqueUrls.length > 1) {
+    for (const node of nodes) {
+      file.message(
+        `The link text "${text}" is used more than once with different URLs. Change the link text to be unique to the URL.`,
         node
       );
     }
