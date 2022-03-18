@@ -24,13 +24,18 @@ describe("remark-lint-link-text", () => {
       A good link: Visit [Mapbox Documentation](https://docs.mapbox.com) for more infomration.
 
       A bad link: [click here](https://docs.mapbox.com).
+
+      A bad link: [link](https://google.com)
     `
     );
 
-    expect(lint.messages.length).toEqual(1);
-    expect(lint.messages[0].reason).toMatchInlineSnapshot(
-      `"Replace \\"click here\\" with descriptive link text that details the destination."`
-    );
+    expect(lint.messages.length).toEqual(2);
+    expect(lint.messages).toMatchInlineSnapshot(`
+      Array [
+        [5:13-5:50: Replace "click here" with descriptive link text that details the destination.],
+        [7:13-7:39: Replace "link" with descriptive link text that details the destination.],
+      ]
+    `);
   });
 
   test("warns against banned link text, case insensitve", async () => {
