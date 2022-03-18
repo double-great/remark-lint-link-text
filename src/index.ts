@@ -66,7 +66,7 @@ function checkUniqueLinkText(file: VFile, nodes: TextNode[], text: string) {
   if (uniqueUrls.length > 1) {
     for (const node of nodes) {
       file.message(
-        `The link text "${text}" is used more than once with different URLs. Change the link text to be unique to the URL.`,
+        `The link text “${text}” is used more than once with different URLs. Change the link text to be unique to the URL.`,
         node
       );
     }
@@ -75,7 +75,7 @@ function checkUniqueLinkText(file: VFile, nodes: TextNode[], text: string) {
 
 function createMessage(file: VFile, node: TextNode, text: string) {
   file.message(
-    `Replace "${text}" with descriptive link text that details the destination.`,
+    `Replace “${text}” with descriptive link text that details the destination.`,
     node
   );
 }

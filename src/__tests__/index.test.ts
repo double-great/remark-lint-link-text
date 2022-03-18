@@ -32,8 +32,8 @@ describe("remark-lint-link-text", () => {
     expect(lint.messages.length).toEqual(2);
     expect(lint.messages).toMatchInlineSnapshot(`
       Array [
-        [5:13-5:50: Replace "click here" with descriptive link text that details the destination.],
-        [7:13-7:39: Replace "link" with descriptive link text that details the destination.],
+        [5:13-5:50: Replace “click here” with descriptive link text that details the destination.],
+        [7:13-7:39: Replace “link” with descriptive link text that details the destination.],
       ]
     `);
   });
@@ -49,7 +49,7 @@ describe("remark-lint-link-text", () => {
 
     expect(lint.messages.length).toEqual(1);
     expect(lint.messages[0].reason).toMatchInlineSnapshot(
-      `"Replace \\"Click here\\" with descriptive link text that details the destination."`
+      `"Replace “Click here” with descriptive link text that details the destination."`
     );
   });
 
@@ -82,8 +82,8 @@ describe("remark-lint-link-text", () => {
     );
     expect(lint.messages).toMatchInlineSnapshot(`
       Array [
-        [1:11-1:55: The link text "staff directory" is used more than once with different URLs. Change the link text to be unique to the URL.],
-        [1:95-1:145: The link text "staff directory" is used more than once with different URLs. Change the link text to be unique to the URL.],
+        [1:11-1:55: The link text “staff directory” is used more than once with different URLs. Change the link text to be unique to the URL.],
+        [1:95-1:145: The link text “staff directory” is used more than once with different URLs. Change the link text to be unique to the URL.],
       ]
     `);
   });
@@ -103,19 +103,19 @@ describe("remark-lint-link-text", () => {
 
     expect(lint.messages.length).toEqual(5);
     expect(lint.messages[0].reason).toMatchInlineSnapshot(
-      `"Replace \\"this mapbox article\\" with descriptive link text that details the destination."`
+      `"Replace “this mapbox article” with descriptive link text that details the destination."`
     );
     expect(lint.messages[1].reason).toMatchInlineSnapshot(
-      `"Replace \\"this Mapbox article\\" with descriptive link text that details the destination."`
+      `"Replace “this Mapbox article” with descriptive link text that details the destination."`
     );
     expect(lint.messages[2].reason).toMatchInlineSnapshot(
-      `"Replace \\"this article\\" with descriptive link text that details the destination."`
+      `"Replace “this article” with descriptive link text that details the destination."`
     );
     expect(lint.messages[3].reason).toMatchInlineSnapshot(
-      `"Replace \\"this blog post\\" with descriptive link text that details the destination."`
+      `"Replace “this blog post” with descriptive link text that details the destination."`
     );
     expect(lint.messages[4].reason).toMatchInlineSnapshot(
-      `"Replace \\"the Mapbox blog post\\" with descriptive link text that details the destination."`
+      `"Replace “the Mapbox blog post” with descriptive link text that details the destination."`
     );
   });
 });
