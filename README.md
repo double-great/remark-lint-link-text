@@ -11,6 +11,7 @@ The linter warns against:
 
 - contextless phrases such as "click here" and "read more."
 - link text that's used more than once for different URLs.
+- using a URL as the link text.
 
 💡 For all banned phrases that begin with `this` or `the`, any words that come between will also fail. For example "this post", "this Mapbox post", and "this Mapbox blog post" will all fail.
 
