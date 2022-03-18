@@ -60,7 +60,7 @@ describe("remark-lint-link-text", () => {
 
     expect(lint.messages.length).toEqual(1);
     expect(lint.messages[0].reason).toMatchInlineSnapshot(
-      `"Avoid using a URL as the link text “https://github.com.com”. Consider users who must speak it out loud and who must listen to a screen reader announce it. Replace it with a short description of the link’s destination."`
+      `"Avoid using a URL “https://github.com.com” as the link text. Consider users who must speak it out loud and who must listen to a screen reader announce it. Replace it with a short description of the link’s destination."`
     );
   });
 

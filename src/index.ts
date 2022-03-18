@@ -71,7 +71,7 @@ function checkIsNotUrl(file: VFile, nodes: TextNode[], text: string) {
   ) {
     for (const node of nodes) {
       file.message(
-        `Avoid using a URL as the link text “${text}”. Consider users who must speak it out loud and who must listen to a screen reader announce it. Replace it with a short description of the link’s destination.`,
+        `Avoid using a URL “${text}” as the link text. Consider users who must speak it out loud and who must listen to a screen reader announce it. Replace it with a short description of the link’s destination.`,
         node
       );
     }
