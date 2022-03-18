@@ -33,6 +33,8 @@ const checkLinkText = lintRule(
 
       // test banned words
       checkBannedWords(file, nodes, txt);
+
+      checkIsNotUrl(file, nodes, txt);
     }
   }
 );
@@ -56,6 +58,21 @@ function checkBannedWords(file: VFile, nodes: TextNode[], text: string) {
   if (banned.includes(text.toLowerCase())) {
     for (const node of nodes) {
       createMessage(file, node, text);
+    }
+  }
+}
+
+function checkIsNotUrl(file: VFile, nodes: TextNode[], text: string) {
+  if (
+    text.match(
+      /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
+    )
+  ) {
+    for (const node of nodes) {
+      file.message(
+        `Avoid using a URL as the link text “${text}”. Consider users who must speak it out loud and who must listen to a screen reader announce it. Replace it with a short description of the link’s destination.`,
+        node
+      );
     }
   }
 }
