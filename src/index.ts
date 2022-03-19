@@ -92,7 +92,7 @@ function checkUniqueLinkText(file: VFile, nodes: TextNode[], text: string) {
 
 function createMessage(file: VFile, node: TextNode, text: string) {
   file.message(
-    `Replace “${text}” with descriptive link text that details the destination.`,
+    `Avoid using the link text “${text},” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination.`,
     node
   );
 }
