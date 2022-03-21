@@ -8,12 +8,31 @@ const checkLinkText = lintRule(
   (tree: Node, file: VFile): void => {
     const textToNodes: { [text: string]: TextNode[] } = {};
     const aggregate = (node: TextNode) => {
+      const hasImage =
+        node.children.filter(({ type }) => type === "image").length > 0;
+
       const text = node.children
         .filter(({ type }) => type === "text")
         .map(({ value }) => value)
         .join(" ");
 
-      if (!text) return;
+      const altText = node.children
+        .filter(({ type }) => type === "image")
+        .map(({ alt }) => alt)
+        .join(" ");
+
+      if (!text && !altText && !hasImage) {
+        file.message(`The link “${node.url}” must have link text`, node);
+        return;
+      }
+
+      if (!text && !altText && hasImage) {
+        file.message(
+          `The link “${node.url}” must have link text or the image inside the link must have alt text`,
+          node
+        );
+        return;
+      }
 
       if (!textToNodes[text]) {
         textToNodes[text] = [];
@@ -98,11 +117,12 @@ function createMessage(file: VFile, node: TextNode, text: string) {
 }
 
 type TextNode = {
-  type: string;
+  type: "text" | "image";
   title: string | null;
-  url: string;
+  url?: string;
+  alt?: string;
   value: string | undefined;
-  position: string[];
+  position: number[];
   children: TextNode[];
 };
 
