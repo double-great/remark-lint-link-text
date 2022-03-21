@@ -99,6 +99,13 @@ describe("remark-lint-link-text", () => {
     `);
   });
 
+  test("link with image", async () => {
+    const lint = await processMarkdown(
+      dedent`Visit the [staff directory ![](https://my-image.png)](https://www.directory.org).`
+    );
+    expect(lint.messages).toMatchInlineSnapshot(`Array []`);
+  });
+
   test("link is image, no alt text", async () => {
     const lint = await processMarkdown(
       dedent`Visit the [![](https://my-image.png)](https://www.directory.org).`
