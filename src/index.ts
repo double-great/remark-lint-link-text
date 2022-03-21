@@ -6,14 +6,33 @@ import banned from "./banned.js";
 const checkLinkText = lintRule(
   "remark-lint:link-text",
   (tree: Node, file: VFile): void => {
-    const textToNodes: { [text: string]: TextNode[] } = {};
-    const aggregate = (node: TextNode) => {
+    const textToNodes: { [text: string]: ItemNode[] } = {};
+    const aggregate = (node: ItemNode) => {
+      const hasImage =
+        node.children.filter(({ type }) => type === "image").length > 0;
+
       const text = node.children
         .filter(({ type }) => type === "text")
         .map(({ value }) => value)
         .join(" ");
 
-      if (!text) return;
+      const altText = node.children
+        .filter(({ type }) => type === "image")
+        .map(({ alt }) => alt)
+        .join(" ");
+
+      if (!text && !altText && !hasImage) {
+        file.message(`The link “${node.url}” must have link text`, node);
+        return;
+      }
+
+      if (!text && !altText && hasImage) {
+        file.message(
+          `The link “${node.url}” must have link text or the image inside the link must have alt text`,
+          node
+        );
+        return;
+      }
 
       if (!textToNodes[text]) {
         textToNodes[text] = [];
@@ -42,7 +61,7 @@ const checkLinkText = lintRule(
 
 export default checkLinkText;
 
-function checkRegexBannedWords(file: VFile, nodes: TextNode[], text: string) {
+function checkRegexBannedWords(file: VFile, nodes: ItemNode[], text: string) {
   for (const start of starts) {
     if (!text.toLowerCase().startsWith(start)) continue;
     for (const regex of bannedRegex) {
@@ -55,7 +74,7 @@ function checkRegexBannedWords(file: VFile, nodes: TextNode[], text: string) {
   }
 }
 
-function checkBannedWords(file: VFile, nodes: TextNode[], text: string) {
+function checkBannedWords(file: VFile, nodes: ItemNode[], text: string) {
   if (banned.includes(text.toLowerCase())) {
     for (const node of nodes) {
       createMessage(file, node, text);
@@ -63,7 +82,7 @@ function checkBannedWords(file: VFile, nodes: TextNode[], text: string) {
   }
 }
 
-function checkIsNotUrl(file: VFile, nodes: TextNode[], text: string) {
+function checkIsNotUrl(file: VFile, nodes: ItemNode[], text: string) {
   if (
     text.match(
       /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
@@ -78,7 +97,7 @@ function checkIsNotUrl(file: VFile, nodes: TextNode[], text: string) {
   }
 }
 
-function checkUniqueLinkText(file: VFile, nodes: TextNode[], text: string) {
+function checkUniqueLinkText(file: VFile, nodes: ItemNode[], text: string) {
   const uniqueUrls = [...new Set(nodes.map(({ url }) => url))];
   if (uniqueUrls.length > 1) {
     for (const node of nodes) {
@@ -90,20 +109,21 @@ function checkUniqueLinkText(file: VFile, nodes: TextNode[], text: string) {
   }
 }
 
-function createMessage(file: VFile, node: TextNode, text: string) {
+function createMessage(file: VFile, node: ItemNode, text: string) {
   file.message(
     `Avoid using the link text “${text},” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination.`,
     node
   );
 }
 
-type TextNode = {
-  type: string;
+type ItemNode = {
+  type: "text" | "image";
   title: string | null;
-  url: string;
+  url?: string;
+  alt?: string;
   value: string | undefined;
-  position: string[];
-  children: TextNode[];
+  position: number[];
+  children: ItemNode[];
 };
 
 const starts = ["this", "the"];

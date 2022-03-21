@@ -99,6 +99,35 @@ describe("remark-lint-link-text", () => {
     `);
   });
 
+  test("link is image, no alt text", async () => {
+    const lint = await processMarkdown(
+      dedent`Visit the [![](https://my-image.png)](https://www.directory.org).`
+    );
+    expect(lint.messages).toMatchInlineSnapshot(`
+      Array [
+        [1:11-1:65: The link “https://www.directory.org” must have link text or the image inside the link must have alt text],
+      ]
+    `);
+  });
+
+  test("link is image, alt text", async () => {
+    const lint = await processMarkdown(
+      dedent`Visit the [![staff directory](https://my-image.png)](https://www.directory.org).`
+    );
+    expect(lint.messages).toMatchInlineSnapshot(`Array []`);
+  });
+
+  test("missing link text", async () => {
+    const lint = await processMarkdown(
+      dedent`Visit the [](https://www.directory.org).`
+    );
+    expect(lint.messages).toMatchInlineSnapshot(`
+      Array [
+        [1:11-1:40: The link “https://www.directory.org” must have link text],
+      ]
+    `);
+  });
+
   test("warns against banned link text, regex match", async () => {
     const lint = await processMarkdown(
       dedent`
