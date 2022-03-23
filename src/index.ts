@@ -12,7 +12,11 @@ const checkLinkText = lintRule(
   "remark-lint:link-text",
   (tree: Node, file: VFile): void => {
     const textToNodes: { [text: string]: TextNode[] } = {};
+
     const aggregate = (node: TextNode) => {
+      const message = (message: string | undefined) =>
+        message ? file.message(message, node) : "";
+
       const hasImage =
         node.children.filter(({ type }) => type === "image").length > 0;
 
@@ -26,11 +30,11 @@ const checkLinkText = lintRule(
         .map(({ alt }) => alt)
         .join(" ");
 
-      checkIsNotEmpty({ file, node, text, altText, hasImage });
-      checkIsNotEmptyNoAlt({ file, node, text, altText, hasImage });
-      checkRegexBannedWords({ file, node, text });
-      checkBannedWords({ file, node, text });
-      checkIsNotUrl({ file, node, text });
+      message(checkIsNotEmpty({ node, text, altText, hasImage }));
+      message(checkIsNotEmptyNoAlt({ node, text, altText, hasImage }));
+      message(checkRegexBannedWords({ text }));
+      message(checkBannedWords({ text }));
+      message(checkIsNotUrl({ text }));
 
       if (!textToNodes[text]) {
         textToNodes[text] = [];
@@ -42,7 +46,8 @@ const checkLinkText = lintRule(
 
     for (const text of Object.keys(textToNodes)) {
       const nodes = textToNodes[text];
-      checkUniqueLinkText({ file, nodes, text });
+      const notes = checkUniqueLinkText({ nodes, text });
+      if (notes) file.message(notes, nodes[0]);
     }
   }
 );

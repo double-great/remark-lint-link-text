@@ -94,7 +94,6 @@ describe("remark-lint-link-text", () => {
     expect(lint.messages).toMatchInlineSnapshot(`
       Array [
         [1:11-1:55: The link text “staff directory” is used more than once with different URLs. Change the link text to be unique to the URL.],
-        [1:95-1:145: The link text “staff directory” is used more than once with different URLs. Change the link text to be unique to the URL.],
       ]
     `);
   });
