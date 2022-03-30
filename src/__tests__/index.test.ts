@@ -21,7 +21,7 @@ describe("remark-lint-link-text", () => {
       dedent`
       # Title
 
-      A good link: Visit [Mapbox Documentation](https://docs.mapbox.com) for more infomration.
+      A good link: Visit [Mapbox Documentation](https://docs.mapbox.com) for more information.
 
       A bad link: [click here](https://docs.mapbox.com).
 
