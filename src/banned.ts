@@ -1,13 +1,19 @@
 const banned: string[] = [
+  "about",
   "can be found here",
+  "click",
   "click here",
+  "email",
+  "figure",
   "found here",
   "here",
   "learn more",
   "link",
   "more",
   "more here",
+  "online",
   "read more",
+  "resource",
   "the article",
   "the document",
   "the entry",
@@ -24,6 +30,7 @@ const banned: string[] = [
   "this post",
   "this site",
   "this website",
+  "url",
   "website",
 ];
 
