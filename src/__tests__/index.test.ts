@@ -134,6 +134,16 @@ describe("remark-lint-link-text", () => {
     `);
   });
 
+  test.only("email address", async () => {
+    const lint = await processMarkdown(
+      dedent`
+Bad: [Email me](mailto:myemail@mail.com)
+Good: [myemail@mail.com](mailto:myemail@mail.com)
+`
+    );
+    expect(lint.messages).toMatchInlineSnapshot(`Array []`);
+  });
+
   test("warns against banned link text, regex match", async () => {
     const lint = await processMarkdown(
       dedent`
