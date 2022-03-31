@@ -28,8 +28,6 @@ describe("remark-lint-link-text", () => {
       A bad link: [link](https://example.com)
     `
     );
-
-    expect(lint.messages.length).toEqual(2);
     expect(lint.messages).toMatchInlineSnapshot(`
       Array [
         [5:13-5:46: Avoid using the link text “click here,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination.],
@@ -46,22 +44,22 @@ describe("remark-lint-link-text", () => {
       A bad link: [Click here](https://example.com).
     `
     );
-
-    expect(lint.messages.length).toEqual(1);
-    expect(lint.messages[0].reason).toMatchInlineSnapshot(
-      `"Avoid using the link text “Click here,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination."`
-    );
+    expect(lint.messages).toMatchInlineSnapshot(`
+      Array [
+        [3:13-3:46: Avoid using the link text “Click here,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination.],
+      ]
+    `);
   });
 
   test("warns against url as link text", async () => {
     const lint = await processMarkdown(
       dedent`A bad link: [https://example.com/initiatives/business/papers/important-ones.htm](https://example.com/initiatives/business/papers/important-ones.htm).`
     );
-
-    expect(lint.messages.length).toEqual(1);
-    expect(lint.messages[0].reason).toMatchInlineSnapshot(
-      `"Avoid using a URL “https://example.com/initiatives/business/papers/important-ones.htm” as the link text. Consider users who must speak it out loud and who must listen to a screen reader announce it. Replace it with a short description of the link’s destination."`
-    );
+    expect(lint.messages).toMatchInlineSnapshot(`
+      Array [
+        [1:13-1:149: Avoid using a URL “https://example.com/initiatives/business/papers/important-ones.htm” as the link text. Consider users who must speak it out loud and who must listen to a screen reader announce it. Replace it with a short description of the link’s destination.],
+      ]
+    `);
   });
 
   test("the...documentation should pass", async () => {
@@ -72,7 +70,6 @@ describe("remark-lint-link-text", () => {
       A good link: [important business papers](https://example.com/initiatives/business/papers/important-ones.htm).
     `
     );
-
     expect(lint.messages.length).toEqual(0);
   });
 
@@ -146,22 +143,14 @@ describe("remark-lint-link-text", () => {
       A bad link: [the example blog post](https://example.com).
     `
     );
-
-    expect(lint.messages.length).toEqual(5);
-    expect(lint.messages[0].reason).toMatchInlineSnapshot(
-      `"Avoid using the link text “this example article,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination."`
-    );
-    expect(lint.messages[1].reason).toMatchInlineSnapshot(
-      `"Avoid using the link text “this article,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination."`
-    );
-    expect(lint.messages[2].reason).toMatchInlineSnapshot(
-      `"Avoid using the link text “click here,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination."`
-    );
-    expect(lint.messages[3].reason).toMatchInlineSnapshot(
-      `"Avoid using the link text “this blog post,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination."`
-    );
-    expect(lint.messages[4].reason).toMatchInlineSnapshot(
-      `"Avoid using the link text “the example blog post,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination."`
-    );
+    expect(lint.messages).toMatchInlineSnapshot(`
+      Array [
+        [3:13-3:56: Avoid using the link text “this example article,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination.],
+        [4:13-4:48: Avoid using the link text “this article,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination.],
+        [5:13-5:46: Avoid using the link text “click here,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination.],
+        [6:13-6:50: Avoid using the link text “this blog post,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination.],
+        [7:13-7:57: Avoid using the link text “the example blog post,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination.],
+      ]
+    `);
   });
 });
