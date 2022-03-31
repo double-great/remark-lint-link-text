@@ -38,6 +38,18 @@ Here’s a sample of the phrases in [`src/banned.ts`](src/banned.ts):
 - found here
 - this article
 
+🚫 The following markdown will cause a warning:
+
+```md
+- [click here](https://example.com/team)
+```
+
+✅ The following markdown will _not_ cause a warning:
+
+```md
+- [Example team](https://example.com/team)
+```
+
 💡 For all banned phrases that begin with `this` or `the`, any words that come between will also fail. For example "this post", "this W3C post", and "this W3C blog post" will all fail.
 
 ### Link text is not unique
@@ -45,12 +57,14 @@ Here’s a sample of the phrases in [`src/banned.ts`](src/banned.ts):
 This warning relates to [WCAG 2.4.9 Link Purpose (Link Only) (AAA)](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=249#link-purpose-link-only) and [WCAG 3.2.4 Consistent Navigation (AA)](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=324#consistent-identification). Links with different purposes and destinations should have different link text. Descriptive link text communicates a link's purpose even when the context is missing. A screen reader listing all of the links on a page is an example where the context would be missing.
 
 🚫 The following markdown will cause a warning:
+
 ```md
 - [Example](https://example.com/team)
 - [Example](https://example.com/about)
 ```
 
-✅ The following markdown will *not* cause a warning:
+✅ The following markdown will _not_ cause a warning:
+
 ```md
 - [Example team](https://example.com/team)
 - [About Example](https://example.com/about)
@@ -63,13 +77,15 @@ This warning relates to [WCAG 2.4.9 Link Purpose (Link Only) (AAA)](https://www.
 [WCAG 2.4.4 Link Purpose (In Context) (A)](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=244#link-purpose-in-context) considers a link containing text that gives a description of the information at that URL a sufficient technique. When a URL is the link text, screen readers have to listen while the reader pronounces every single character of a URL. Audibly, this is less descriptive and more time consuming to listen to than descriptive link text. [WebAIM's Links and Hypertext page](https://webaim.org/techniques/hypertext/link_text) explains the challenges of [URLs as links](https://webaim.org/techniques/hypertext/link_text#urls).
 
 🚫 The following markdown will cause a warning:
+
 ```md
 [https://www.w3c.org/WAI/fundamentals/accessibility-intro/](https://www.w3c.org/WAI/fundamentals/accessibility-intro/)
 ```
 
 When read aloud, users will hear "h t t p s colon slash slash w w w dot w 3 c dot org slash w a i slash fundementals slash accessibility dash intro slash, link".
 
-✅ The following markdown will *not* cause a warning:
+✅ The following markdown will _not_ cause a warning:
+
 ```md
 [Introduction to Web Accessibility](https://www.w3c.org/WAI/fundamentals/accessibility-intro/)
 ```
@@ -83,11 +99,13 @@ When read aloud, users will hear "Introduction to Web Accessibility, link".
 In markdown, missing link text is often an oversight. Although an [`<a>` element without a `href` attribute is valid](https://html.spec.whatwg.org/#the-a-element) HTML, [WebAIM suggests that empty links can be very confusing](https://webaim.org/techniques/hypertext/link_text#empty_links) to keyboard and screen reader users and should be avoided completely.
 
 🚫 The following markdown will cause a warning:
+
 ```md
 [](https://example.com)
 ```
 
-✅ The following markdown will *not* cause a warning:
+✅ The following markdown will _not_ cause a warning:
+
 ```md
 [Example](https://example.com)
 ```
@@ -97,11 +115,13 @@ In markdown, missing link text is often an oversight. Although an [`<a>` element
 When an image is the only content in a link, alt text is required. In this context, missing alt text is a [failure of WCAG 2.4.4 (A), 2.4.9 (AAA), and 4.1.2 (A)](https://www.w3.org/WAI/WCAG21/Techniques/failures/F89).
 
 🚫 The following markdown will cause a warning:
+
 ```md
 [![](https://example.com/logo.svg)](https://example.com)
 ```
 
-✅ The following markdown will *not* cause a warning:
+✅ The following markdown will _not_ cause a warning:
+
 ```md
 [![Example logo](https://example.com/logo.svg)](https://example.com)
 ```
