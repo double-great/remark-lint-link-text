@@ -128,6 +128,20 @@ When an image is the only content in a link, alt text is required. In this conte
 
 💡 When an image is the only content in a link, the image's alt text effectively becomes the link text. Based on [WCAG 2.4.4 Link Purpose (In Context) (A)](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=244#link-purpose-in-context), the alt text should describle the function of the link (instead of describing the image).
 
+### Link to email does not contain email address in link text
+
+When linking to an email address, using `mailto:`, the email address should be in the link text. This provides users with context for what will happen when interacting with the link (a new email message will open in email application). Also, email in the link text is useful context when the link can't be activated (plain text paste, printed page).
+
+```md
+[Email me](mailto:email@example.com)
+```
+
+✅ The following markdown will _not_ cause a warning:
+
+```md
+[email@example.com](mailto:email@example.com)
+```
+
 ## More link text resources
 
 - [A11y Collective: The Perfect Link](https://www.a11y-collective.com/blog/the-perfect-link/)
