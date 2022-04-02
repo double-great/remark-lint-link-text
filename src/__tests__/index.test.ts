@@ -137,9 +137,9 @@ describe("remark-lint-link-text", () => {
   test.only("email address", async () => {
     const lint = await processMarkdown(
       dedent`
-Bad: [Email me](mailto:myemail@mail.com)
-Good: [myemail@mail.com](mailto:myemail@mail.com)
-`
+      Bad: [Email me](mailto:email@example.com)
+      Good: [email@example.com](mailto:email@example.com)
+    `
     );
     expect(lint.messages).toMatchInlineSnapshot(`Array []`);
   });
