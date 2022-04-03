@@ -55,11 +55,13 @@
   },
   "homepage": "https://github.com/double-great/remark-lint-link-text#readme",
   "jest": {
+    "clearMocks": true,
     "transformIgnorePatterns": [
       "!node_modules/"
     ],
     "moduleNameMapper": {
       "^..?/banned.js$": "<rootDir>/src/banned.ts",
+      "^..?/rule.js$": "<rootDir>/src/rule.ts",
       "^..?/banned-words.js$": "<rootDir>/src/rules/banned-words.ts",
       "^..?/rules/(.*).js$": "<rootDir>/src/rules/$1.ts"
     }

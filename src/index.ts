@@ -30,11 +30,11 @@ const checkLinkText = lintRule(
         .map(({ alt }) => alt)
         .join(" ");
 
-      message(checkIsNotEmpty({ node, text, altText, hasImage }));
-      message(checkIsNotEmptyNoAlt({ node, text, altText, hasImage }));
-      message(checkRegexBannedWords({ text }));
-      message(checkBannedWords({ text }));
-      message(checkIsNotUrl({ text }));
+      message(checkIsNotEmpty.check({ node, text, altText, hasImage }));
+      message(checkIsNotEmptyNoAlt.check({ node, text, altText, hasImage }));
+      message(checkRegexBannedWords.check({ text }));
+      message(checkBannedWords.check({ text }));
+      message(checkIsNotUrl.check({ text }));
 
       if (!textToNodes[text]) {
         textToNodes[text] = [];
@@ -46,7 +46,7 @@ const checkLinkText = lintRule(
 
     for (const text of Object.keys(textToNodes)) {
       const nodes = textToNodes[text];
-      const notes = checkUniqueLinkText({ nodes, text });
+      const notes = checkUniqueLinkText.check({ text, nodes });
       if (notes) file.message(notes, nodes[0]);
     }
   }
