@@ -132,6 +132,8 @@ When an image is the only content in a link, alt text is required. In this conte
 
 When linking to an email address, using `mailto:`, the email address should be in the link text. This provides users with context for what will happen when interacting with the link (a new email message will open in email application). Also, email in the link text is useful context when the link can’t be activated (plain text paste, printed page).
 
+🚫 The following markdown will cause a warning:
+
 ```md
 [Email me](mailto:email@example.com)
 ```
