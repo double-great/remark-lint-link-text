@@ -131,6 +131,21 @@ describe("remark-lint-link-text", () => {
     `);
   });
 
+  test("email address", async () => {
+    const lint = await processMarkdown(
+      dedent`
+      Bad: [Email me](mailto:email@example.com)
+      Good: [otheremail@example.com](mailto:otheremail@example.com?subject=hey)
+      Good: [email@example.com](mailto:email@example.com)
+    `
+    );
+    expect(lint.messages).toMatchInlineSnapshot(`
+      Array [
+        [1:6-1:42: Text must include email “email@example.com” because the link URL will generate an email message],
+      ]
+    `);
+  });
+
   test("warns against banned link text, regex match", async () => {
     const lint = await processMarkdown(
       dedent`
