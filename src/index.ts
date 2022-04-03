@@ -8,10 +8,27 @@ import checkBannedWords from "./rules/banned-words.js";
 import checkIsNotUrl from "./rules/not-url.js";
 import checkUniqueLinkText from "./rules/unique.js";
 
+export type Config = {
+  "banned-words": boolean | string[];
+  empty: boolean;
+  "empty-alt-text": boolean;
+  "not-url": boolean;
+  unique: boolean;
+};
+
 const checkLinkText = lintRule(
   "remark-lint:link-text",
-  (tree: Node, file: VFile): void => {
+  (tree: Node, file: VFile, options?: Config): void => {
     const textToNodes: { [text: string]: TextNode[] } = {};
+
+    const config = {
+      "banned-words": true,
+      empty: true,
+      "empty-alt-text": true,
+      "not-url": true,
+      unique: true,
+      ...options,
+    };
 
     const aggregate = (node: TextNode) => {
       const message = (message: string | undefined) =>
@@ -30,11 +47,14 @@ const checkLinkText = lintRule(
         .map(({ alt }) => alt)
         .join(" ");
 
-      message(checkIsNotEmpty({ node, text, altText, hasImage }));
-      message(checkIsNotEmptyNoAlt({ node, text, altText, hasImage }));
-      message(checkRegexBannedWords({ text }));
-      message(checkBannedWords({ text }));
-      message(checkIsNotUrl({ text }));
+      if (config["empty"])
+        message(checkIsNotEmpty({ node, text, altText, hasImage }));
+      if (config["empty-alt-text"])
+        message(checkIsNotEmptyNoAlt({ node, text, altText, hasImage }));
+      if (config["banned-words"])
+        message(checkRegexBannedWords({ text, config }));
+      if (config["banned-words"]) message(checkBannedWords({ text, config }));
+      if (config["not-url"]) message(checkIsNotUrl({ text }));
 
       if (!textToNodes[text]) {
         textToNodes[text] = [];
@@ -44,10 +64,12 @@ const checkLinkText = lintRule(
 
     visit(tree, "link", aggregate);
 
-    for (const text of Object.keys(textToNodes)) {
-      const nodes = textToNodes[text];
-      const notes = checkUniqueLinkText({ nodes, text });
-      if (notes) file.message(notes, nodes[0]);
+    if (config["unique"]) {
+      for (const text of Object.keys(textToNodes)) {
+        const nodes = textToNodes[text];
+        const notes = checkUniqueLinkText({ nodes, text });
+        if (notes) file.message(notes, nodes[0]);
+      }
     }
   }
 );
