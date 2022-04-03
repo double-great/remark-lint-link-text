@@ -1,5 +1,7 @@
 # remark-lint-link-text
 
+[![Current version](https://img.shields.io/npm/v/@double-great/remark-lint-link-text)](https://github.com/double-great/remark-lint-link-text/tags) [![License](https://img.shields.io/npm/l/@double-great/remark-lint-link-text)]()
+
 A [remark-lint](https://github.com/remarkjs/remark-lint) plugin that warns against non-descriptive link text.
 
 ```md
