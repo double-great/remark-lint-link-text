@@ -7,6 +7,7 @@ import checkRegexBannedWords from "./rules/regex-banned-words.js";
 import checkBannedWords from "./rules/banned-words.js";
 import checkIsNotUrl from "./rules/not-url.js";
 import checkUniqueLinkText from "./rules/unique.js";
+import checkEmail from "./rules/email.js";
 
 const checkLinkText = lintRule(
   "remark-lint:link-text",
@@ -35,6 +36,7 @@ const checkLinkText = lintRule(
       message(checkRegexBannedWords.check({ text }));
       message(checkBannedWords.check({ text }));
       message(checkIsNotUrl.check({ text }));
+      message(checkEmail.check({ node, text }));
 
       if (!textToNodes[text]) {
         textToNodes[text] = [];
