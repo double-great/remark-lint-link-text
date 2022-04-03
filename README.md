@@ -144,6 +144,10 @@ When linking to an email address, using `mailto:`, the email address should be i
 [email@example.com](mailto:email@example.com)
 ```
 
+```md
+[otheremail@example.com](mailto:otheremail@example.com?subject=hello)
+```
+
 ## More link text resources
 
 - [A11y Collective: The Perfect Link](https://www.a11y-collective.com/blog/the-perfect-link/)
