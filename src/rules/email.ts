@@ -9,10 +9,9 @@ export default function checkEmail({
 }) {
   const { url } = node;
   if (!url || !url.startsWith("mailto:")) return;
-  // check the `text` to see if it has the email.
-  // create var with just the email.
-  const email = url.replace("mailto:", "");
-  if (text.includes(email)) {
-    return "Text must include email";
+  const emailArray = url.split("?");
+  const email = emailArray[0].replace("mailto:", "");
+  if (!text.includes(email)) {
+    return `Text must include email “${email}” because the link URL will generate an email message`;
   }
 }
