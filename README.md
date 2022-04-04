@@ -27,6 +27,15 @@ Add the plugin to your remark configuration:
 
 ## List of warnings
 
+<!-- generated content -->
+
+- [Link text is not descriptive (`not-descriptive`)](#link-text-is-not-descriptive)
+- [Link text is not unique (`unique`)](#link-text-is-not-unique)
+- [Link text is a URL (`url`)](#link-text-is-a-url)
+- [Link text is missing (`empty`)](#link-text-is-missing)
+- [Linked image is missing alt text (`empty-alt-text`)](#linked-image-is-missing-alt-text)
+- [Link to email does not contain email address in link text (`email`)](#link-to-email-does-not-contain-email-address-in-link-text)
+
 ### Link text is not descriptive
 
 Pulling from [this library’s list of bad link text](src/banned.ts), any link text that matches this list will be flagged. Using non-specific link text is a [failure of WCAG 2.4.9 (AAA)](https://www.w3.org/WAI/WCAG21/Techniques/failures/F84.html).
@@ -149,6 +158,8 @@ When linking to an email address, using `mailto:`, the email address should be i
 ```md
 [otheremail@example.com](mailto:otheremail@example.com?subject=hello)
 ```
+
+<!-- end generated content -->
 
 ## More link text resources
 

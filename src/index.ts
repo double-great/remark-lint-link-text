@@ -1,11 +1,10 @@
 import { lintRule } from "unified-lint-rule";
 import { VFile, Node } from "unified-lint-rule/lib";
 import { visit } from "unist-util-visit";
-import checkIsNotEmptyNoAlt from "./rules/not-empty-no-alt.js";
-import checkIsNotEmpty from "./rules/no-empty.js";
-import checkRegexBannedWords from "./rules/regex-banned-words.js";
-import checkBannedWords from "./rules/banned-words.js";
-import checkIsNotUrl from "./rules/not-url.js";
+import checkIsNotEmptyNoAlt from "./rules/empty-no-alt.js";
+import checkIsNotEmpty from "./rules/empty.js";
+import checkNotDescriptive from "./rules/not-descriptive.js";
+import checkIsNotUrl from "./rules/url.js";
 import checkUniqueLinkText from "./rules/unique.js";
 import checkEmail from "./rules/email.js";
 
@@ -31,12 +30,11 @@ const checkLinkText = lintRule(
         .map(({ alt }) => alt)
         .join(" ");
 
-      message(checkIsNotEmpty({ node, text, altText, hasImage }));
-      message(checkIsNotEmptyNoAlt({ node, text, altText, hasImage }));
-      message(checkRegexBannedWords({ text }));
-      message(checkBannedWords({ text }));
-      message(checkIsNotUrl({ text }));
-      message(checkEmail({ node, text }));
+      message(checkIsNotEmpty.check({ node, text, altText, hasImage }));
+      message(checkIsNotEmptyNoAlt.check({ node, text, altText, hasImage }));
+      message(checkNotDescriptive.check({ text }));
+      message(checkIsNotUrl.check({ text }));
+      message(checkEmail.check({ node, text }));
 
       if (!textToNodes[text]) {
         textToNodes[text] = [];
@@ -48,7 +46,7 @@ const checkLinkText = lintRule(
 
     for (const text of Object.keys(textToNodes)) {
       const nodes = textToNodes[text];
-      const notes = checkUniqueLinkText({ nodes, text });
+      const notes = checkUniqueLinkText.check({ text, nodes });
       if (notes) file.message(notes, nodes[0]);
     }
   }
