@@ -1,11 +1,10 @@
 import { lintRule } from "unified-lint-rule";
 import { VFile, Node } from "unified-lint-rule/lib";
 import { visit } from "unist-util-visit";
-import checkIsNotEmptyNoAlt from "./rules/not-empty-no-alt.js";
-import checkIsNotEmpty from "./rules/no-empty.js";
-import checkRegexBannedWords from "./rules/regex-banned-words.js";
-import checkBannedWords from "./rules/banned-words.js";
-import checkIsNotUrl from "./rules/not-url.js";
+import checkIsNotEmptyNoAlt from "./rules/empty-no-alt.js";
+import checkIsNotEmpty from "./rules/empty.js";
+import checkNotDescriptive from "./rules/not-descriptive.js";
+import checkIsNotUrl from "./rules/url.js";
 import checkUniqueLinkText from "./rules/unique.js";
 import checkEmail from "./rules/email.js";
 
@@ -33,8 +32,7 @@ const checkLinkText = lintRule(
 
       message(checkIsNotEmpty.check({ node, text, altText, hasImage }));
       message(checkIsNotEmptyNoAlt.check({ node, text, altText, hasImage }));
-      message(checkRegexBannedWords.check({ text }));
-      message(checkBannedWords.check({ text }));
+      message(checkNotDescriptive.check({ text }));
       message(checkIsNotUrl.check({ text }));
       message(checkEmail.check({ node, text }));
 
