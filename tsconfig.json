@@ -11,5 +11,5 @@
     "skipLibCheck": true,
     "resolveJsonModule": true
   },
-  "include": ["src/index.ts"]
+  "include": ["src/index.ts", "src/docs.ts"]
 }

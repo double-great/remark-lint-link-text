@@ -1,12 +1,12 @@
 import { lintRule } from "unified-lint-rule";
 import { VFile, Node } from "unified-lint-rule/lib";
 import { visit } from "unist-util-visit";
-import checkIsNotEmptyNoAlt from "./rules/not-empty-no-alt.js";
-import checkIsNotEmpty from "./rules/no-empty.js";
-import checkRegexBannedWords from "./rules/regex-banned-words.js";
-import checkBannedWords from "./rules/banned-words.js";
-import checkIsNotUrl from "./rules/not-url.js";
+import checkIsNotEmptyNoAlt from "./rules/empty-no-alt.js";
+import checkIsNotEmpty from "./rules/empty.js";
+import checkNotDescriptive from "./rules/not-descriptive.js";
+import checkIsNotUrl from "./rules/url.js";
 import checkUniqueLinkText from "./rules/unique.js";
+import checkEmail from "./rules/email.js";
 
 export type Config = {
   "banned-words": boolean | string[];
@@ -14,6 +14,7 @@ export type Config = {
   "empty-alt-text": boolean;
   "not-url": boolean;
   unique: boolean;
+  email: boolean;
 };
 
 const checkLinkText = lintRule(
@@ -26,6 +27,7 @@ const checkLinkText = lintRule(
       empty: true,
       "empty-alt-text": true,
       "not-url": true,
+      unique: true,
       unique: true,
       ...options,
     };
@@ -48,13 +50,12 @@ const checkLinkText = lintRule(
         .join(" ");
 
       if (config["empty"])
-        message(checkIsNotEmpty({ node, text, altText, hasImage }));
+        message(checkIsNotEmpty.check({ node, text, altText, hasImage }));
       if (config["empty-alt-text"])
-        message(checkIsNotEmptyNoAlt({ node, text, altText, hasImage }));
-      if (config["banned-words"])
-        message(checkRegexBannedWords({ text, config }));
-      if (config["banned-words"]) message(checkBannedWords({ text, config }));
-      if (config["not-url"]) message(checkIsNotUrl({ text }));
+        message(checkIsNotEmptyNoAlt.check({ node, text, altText, hasImage }));
+      if (config["banned-words"]) message(checkNotDescriptive.check({ text }));
+      if (config["not-url"]) message(checkIsNotUrl.check({ text }));
+      if (config["email"]) message(checkEmail.check({ node, text }));
 
       if (!textToNodes[text]) {
         textToNodes[text] = [];
@@ -67,7 +68,7 @@ const checkLinkText = lintRule(
     if (config["unique"]) {
       for (const text of Object.keys(textToNodes)) {
         const nodes = textToNodes[text];
-        const notes = checkUniqueLinkText({ nodes, text });
+        const notes = checkUniqueLinkText.check({ text, nodes });
         if (notes) file.message(notes, nodes[0]);
       }
     }

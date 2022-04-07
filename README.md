@@ -27,6 +27,15 @@ Add the plugin to your remark configuration:
 
 ## List of warnings
 
+<!-- generated content -->
+
+- [Link text is not descriptive (`not-descriptive`)](#link-text-is-not-descriptive)
+- [Link text is not unique (`unique`)](#link-text-is-not-unique)
+- [Link text is a URL (`url`)](#link-text-is-a-url)
+- [Link text is missing (`empty`)](#link-text-is-missing)
+- [Linked image is missing alt text (`empty-alt-text`)](#linked-image-is-missing-alt-text)
+- [Link to email does not contain email address in link text (`email`)](#link-to-email-does-not-contain-email-address-in-link-text)
+
 ### Link text is not descriptive
 
 Pulling from [this library’s list of bad link text](src/banned.ts), any link text that matches this list will be flagged. Using non-specific link text is a [failure of WCAG 2.4.9 (AAA)](https://www.w3.org/WAI/WCAG21/Techniques/failures/F84.html).
@@ -52,11 +61,11 @@ Here’s a sample of the phrases in [`src/banned.ts`](src/banned.ts):
 - [Example team](https://example.com/team)
 ```
 
-💡 For all banned phrases that begin with `this` or `the`, any words that come between will also fail. For example "this post", "this W3C post", and "this W3C blog post" will all fail.
+💡 For all banned phrases that begin with `this` or `the`, any words that come between will also fail. For example “this post”, “this W3C post”, and “this W3C blog post” will all fail.
 
 ### Link text is not unique
 
-This warning relates to [WCAG 2.4.9 Link Purpose (Link Only) (AAA)](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=249#link-purpose-link-only) and [WCAG 3.2.4 Consistent Navigation (AA)](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=324#consistent-identification). Links with different purposes and destinations should have different link text. Descriptive link text communicates a link's purpose even when the context is missing. A screen reader listing all of the links on a page is an example where the context would be missing.
+This warning relates to [WCAG 2.4.9 Link Purpose (Link Only) (AAA)](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=249#link-purpose-link-only) and [WCAG 3.2.4 Consistent Navigation (AA)](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=324#consistent-identification). Links with different purposes and destinations should have different link text. Descriptive link text communicates a link’s purpose even when the context is missing. A screen reader listing all of the links on a page is an example where the context would be missing.
 
 🚫 The following markdown will cause a warning:
 
@@ -76,7 +85,7 @@ This warning relates to [WCAG 2.4.9 Link Purpose (Link Only) (AAA)](https://www.
 
 ### Link text is a URL
 
-[WCAG 2.4.4 Link Purpose (In Context) (A)](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=244#link-purpose-in-context) considers a link containing text that gives a description of the information at that URL a sufficient technique. When a URL is the link text, screen readers have to listen while the reader pronounces every single character of a URL. Audibly, this is less descriptive and more time consuming to listen to than descriptive link text. [WebAIM's Links and Hypertext page](https://webaim.org/techniques/hypertext/link_text) explains the challenges of [URLs as links](https://webaim.org/techniques/hypertext/link_text#urls).
+[WCAG 2.4.4 Link Purpose (In Context) (A)](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=244#link-purpose-in-context) considers a link containing text that gives a description of the information at that URL a sufficient technique. When a URL is the link text, screen readers have to listen while the reader pronounces every single character of a URL. Audibly, this is less descriptive and more time consuming to listen to than descriptive link text. [WebAIM’s Links and Hypertext page](https://webaim.org/techniques/hypertext/link_text) explains the challenges of [URLs as links](https://webaim.org/techniques/hypertext/link_text#urls).
 
 🚫 The following markdown will cause a warning:
 
@@ -84,7 +93,7 @@ This warning relates to [WCAG 2.4.9 Link Purpose (Link Only) (AAA)](https://www.
 [https://www.w3c.org/WAI/fundamentals/accessibility-intro/](https://www.w3c.org/WAI/fundamentals/accessibility-intro/)
 ```
 
-When read aloud, users will hear "h t t p s colon slash slash w w w dot w 3 c dot org slash w a i slash fundementals slash accessibility dash intro slash, link".
+When read aloud, users will hear “h t t p s colon slash slash w w w dot w 3 c dot org slash w a i slash fundementals slash accessibility dash intro slash, link”.
 
 ✅ The following markdown will _not_ cause a warning:
 
@@ -92,7 +101,7 @@ When read aloud, users will hear "h t t p s colon slash slash w w w dot w 3 c do
 [Introduction to Web Accessibility](https://www.w3c.org/WAI/fundamentals/accessibility-intro/)
 ```
 
-When read aloud, users will hear "Introduction to Web Accessibility, link".
+When read aloud, users will hear “Introduction to Web Accessibility, link”.
 
 💡 This check is at odds with some stylistic guidelines, like APA. The [APA Style’s Accessible URLs page](https://apastyle.apa.org/style-grammar-guidelines/paper-format/accessibility/urls) provides some rationale for their guidelines as it relates to [WCAG 2.4.4](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=244#link-purpose-in-context).
 
@@ -128,12 +137,34 @@ When an image is the only content in a link, alt text is required. In this conte
 [![Example logo](https://example.com/logo.svg)](https://example.com)
 ```
 
-💡 When an image is the only content in a link, the image's alt text effectively becomes the link text. Based on [WCAG 2.4.4 Link Purpose (In Context) (A)](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=244#link-purpose-in-context), the alt text should describle the function of the link (instead of describing the image).
+💡 When an image is the only content in a link, the image’s alt text effectively becomes the link text. Based on [WCAG 2.4.4 Link Purpose (In Context) (A)](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=244#link-purpose-in-context), the alt text should describle the function of the link (instead of describing the image).
+
+### Link to email does not contain email address in link text
+
+When linking to an email address, using `mailto:`, the email address should be in the link text. This provides users with context for what will happen when interacting with the link (a new email message will open in email application). Also, email in the link text is useful context when the link can’t be activated (plain text paste, printed page).
+
+🚫 The following markdown will cause a warning:
+
+```md
+[Email me](mailto:email@example.com)
+```
+
+✅ The following markdown will _not_ cause a warning:
+
+```md
+[email@example.com](mailto:email@example.com)
+```
+
+```md
+[otheremail@example.com](mailto:otheremail@example.com?subject=hello)
+```
+
+<!-- end generated content -->
 
 ## More link text resources
 
 - [A11y Collective: The Perfect Link](https://www.a11y-collective.com/blog/the-perfect-link/)
-- [Get Stark: The endless search for "here" in the unhelpful "click here" button](https://www.getstark.co/blog/the-endless-search-for-here-in-the-unhelpful-click-here-button)
+- [Get Stark: The endless search for “here” in the unhelpful “click here” button](https://www.getstark.co/blog/the-endless-search-for-here-in-the-unhelpful-click-here-button)
 - [NC State University: Accessible Hyperlinks](https://accessibility.oit.ncsu.edu/accessible-hyperlinks/)
 - [Penn State: Link Text](https://accessibility.psu.edu/linktext/)
 - [WCAG 2.4.4: Link Purpose](https://www.w3.org/WAI/WCAG21/Understanding/link-purpose-in-context.html)
