@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { TextNode } from "./index.js";
+import { Config, TextNode } from "./index.js";
 
 export type RuleProps = {
   id: string;
@@ -34,6 +34,7 @@ export default class Rule {
     this.notOk = props.notOk;
     this.listen = props.listen;
     this.note = props.note;
+    //this.config = props.config;
   }
 
   check({
@@ -48,6 +49,7 @@ export default class Rule {
     nodes?: TextNode[];
     altText?: string;
     hasImage?: boolean;
+    config?: Config;
   }): string | undefined {
     throw new Error("check() method not implemented.");
   }

@@ -1,21 +1,64 @@
-import banned from "../banned.js";
+import { Config } from "../index.js";
 import Rule, { RuleProps } from "../rule.js";
 
 class CheckNotDescriptive extends Rule {
   constructor(props: RuleProps) {
     super(props);
+    this.config = [
+      "about",
+      "button",
+      "can be found here",
+      "click",
+      "click here",
+      "continue",
+      "continue reading",
+      "details",
+      "email",
+      "figure",
+      "found here",
+      "here",
+      "learn more",
+      "link",
+      "more",
+      "more details",
+      "more here",
+      "online",
+      "read more",
+      "resource",
+      "the article",
+      "the document",
+      "the entry",
+      "the link",
+      "the page",
+      "the post",
+      "the site",
+      "the website",
+      "this article",
+      "this document",
+      "this entry",
+      "this link",
+      "this page",
+      "this post",
+      "this site",
+      "this website",
+      "url",
+      "website",
+    ];
     this.recommendation = this.setRecommendation();
   }
 
-  check({ text }: { text: string }) {
-    if (banned.includes(text.toLowerCase())) {
+  check({ text, config }: { text: string; config?: Config }) {
+    if (!config) return;
+    if (config) this.config = config;
+
+    if (config.includes(text.toLowerCase())) {
       this.recommendation = this.setRecommendation(text);
       return this.suggestion();
     }
 
     for (const start of starts) {
       if (!text.toLowerCase().startsWith(start)) continue;
-      for (const regex of bannedRegex) {
+      for (const regex of bannedRegex(this.config)) {
         if (new RegExp(`${regex}`, "i").test(text)) {
           this.recommendation = this.setRecommendation(text);
           return this.suggestion();
@@ -53,13 +96,14 @@ Here’s a sample of the phrases in [\`src/banned.ts\`](src/banned.ts):
 });
 
 export const starts = ["this", "the"];
-export const bannedRegex = banned.reduce((arr: string[], b: string) => {
-  for (const s of starts) {
-    const trimmed = b.replace(s, "").trim();
-    if (b.startsWith(s) && !arr.includes(trimmed))
-      arr.push(`${s}\\s(.*?)\\s${trimmed}\\b$`);
-  }
-  return arr;
-}, []);
+export const bannedRegex = (config: string[]) =>
+  config.reduce((arr: string[], b: string) => {
+    for (const s of starts) {
+      const trimmed = b.replace(s, "").trim();
+      if (b.startsWith(s) && !arr.includes(trimmed))
+        arr.push(`${s}\\s(.*?)\\s${trimmed}\\b$`);
+    }
+    return arr;
+  }, []);
 
 export default checkNotDescriptive;
