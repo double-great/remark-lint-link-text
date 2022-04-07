@@ -36,38 +36,6 @@ describe("remark-lint-link-text", () => {
     `);
   });
 
-  test("warns against banned link text, config", async () => {
-    const lint = await processMarkdown(
-      dedent`
-      # Title
-
-      A good link: Visit [Example’s website](https://example.com) for more information.
-
-      A bad link: [click here](https://example.com).
-
-      A bad link: [link](https://example.com)
-    `,
-      {
-        "banned-words": ["click here"],
-      }
-    );
-    expect(lint.messages).toMatchInlineSnapshot(`
-      Array [
-        [5:13-5:46: Avoid using the link text “click here,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination.],
-      ]
-    `);
-  });
-
-  test("warns against banned link text, regex, config", async () => {
-    const lint = await processMarkdown(
-      dedent` Visit [this cool article](https://example.com).`,
-      {
-        "banned-words": ["this entry"],
-      }
-    );
-    expect(lint.messages).toMatchInlineSnapshot(`Array []`);
-  });
-
   test("warns against banned link text, case insensitve", async () => {
     const lint = await processMarkdown(
       dedent`
@@ -195,11 +163,7 @@ describe("remark-lint-link-text", () => {
       Good: [email@example.com](mailto:email@example.com)
     `
     );
-    expect(lint.messages).toMatchInlineSnapshot(`
-      Array [
-        [1:6-1:42: Text must include email “email@example.com” because the link URL will generate an email message (https://tinyurl.com/y8aj6o83)],
-      ]
-    `);
+    expect(lint.messages).toMatchInlineSnapshot(`Array []`);
   });
 
   test("warns against banned link text, regex match", async () => {
@@ -231,7 +195,7 @@ describe("remark-lint-link-text", () => {
     );
     expect(lint.messages).toMatchInlineSnapshot(`
       Array [
-        [1:11-1:34: The link “https://example.com” must have link text],
+        [1:11-1:34: The link “https://example.com” must have link text (https://tinyurl.com/y9qcopkq)],
       ]
     `);
   });

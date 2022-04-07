@@ -28,7 +28,6 @@ const checkLinkText = lintRule(
       "empty-alt-text": true,
       "not-url": true,
       unique: true,
-      unique: true,
       ...options,
     };
 
@@ -53,7 +52,10 @@ const checkLinkText = lintRule(
         message(checkIsNotEmpty.check({ node, text, altText, hasImage }));
       if (config["empty-alt-text"])
         message(checkIsNotEmptyNoAlt.check({ node, text, altText, hasImage }));
-      if (config["banned-words"]) message(checkNotDescriptive.check({ text }));
+      if (config["banned-words"])
+        message(
+          checkNotDescriptive.check({ text, config: config["banned-words"] })
+        );
       if (config["not-url"]) message(checkIsNotUrl.check({ text }));
       if (config["email"]) message(checkEmail.check({ node, text }));
 

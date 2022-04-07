@@ -49,7 +49,7 @@ export default class Rule {
     nodes?: TextNode[];
     altText?: string;
     hasImage?: boolean;
-    config?: Config;
+    config?: unknown;
   }): string | undefined {
     throw new Error("check() method not implemented.");
   }
