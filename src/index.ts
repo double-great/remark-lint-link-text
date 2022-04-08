@@ -8,10 +8,29 @@ import checkIsNotUrl from "./rules/url.js";
 import checkUniqueLinkText from "./rules/unique.js";
 import checkEmail from "./rules/email.js";
 
+export type Config = {
+  "not-descriptive": boolean | string[];
+  empty: boolean;
+  "empty-alt-text": boolean;
+  "not-url": boolean;
+  unique: boolean;
+  email: boolean;
+};
+
 const checkLinkText = lintRule(
   "remark-lint:link-text",
-  (tree: Node, file: VFile): void => {
+  (tree: Node, file: VFile, options?: Config): void => {
     const textToNodes: { [text: string]: TextNode[] } = {};
+
+    const config = {
+      "not-descriptive": true,
+      empty: true,
+      "empty-alt-text": true,
+      "not-url": true,
+      unique: true,
+      email: true,
+      ...options,
+    };
 
     const aggregate = (node: TextNode) => {
       const message = (message: string | undefined) =>
@@ -30,11 +49,23 @@ const checkLinkText = lintRule(
         .map(({ alt }) => alt)
         .join(" ");
 
-      message(checkIsNotEmpty.check({ node, text, altText, hasImage }));
-      message(checkIsNotEmptyNoAlt.check({ node, text, altText, hasImage }));
-      message(checkNotDescriptive.check({ text }));
-      message(checkIsNotUrl.check({ text }));
-      message(checkEmail.check({ node, text }));
+      if (config["empty"]) {
+        message(checkIsNotEmpty.check({ node, text, altText, hasImage }));
+      }
+      if (config["empty-alt-text"]) {
+        message(checkIsNotEmptyNoAlt.check({ node, text, altText, hasImage }));
+      }
+      if (config["not-descriptive"]) {
+        message(
+          checkNotDescriptive.check({ text, config: config["not-descriptive"] })
+        );
+      }
+      if (config["not-url"]) {
+        message(checkIsNotUrl.check({ text }));
+      }
+      if (config["email"]) {
+        message(checkEmail.check({ node, text }));
+      }
 
       if (!textToNodes[text]) {
         textToNodes[text] = [];
@@ -44,10 +75,12 @@ const checkLinkText = lintRule(
 
     visit(tree, "link", aggregate);
 
-    for (const text of Object.keys(textToNodes)) {
-      const nodes = textToNodes[text];
-      const notes = checkUniqueLinkText.check({ text, nodes });
-      if (notes) file.message(notes, nodes[0]);
+    if (config["unique"]) {
+      for (const text of Object.keys(textToNodes)) {
+        const nodes = textToNodes[text];
+        const notes = checkUniqueLinkText.check({ text, nodes });
+        if (notes) file.message(notes, nodes[0]);
+      }
     }
   }
 );

@@ -23,6 +23,15 @@ describe("Link to email does not contain email address in link text", () => {
       \`\`\`md
       [otheremail@example.com](mailto:otheremail@example.com?subject=hello)
       \`\`\`
+
+      Configuration:
+
+      <!-- prettier-ignore-start -->
+      \`\`\`js
+      // disable the rule:
+      [\\"@double-great/remark-lint-link-text\\", [1, {\\"email\\":false}]]
+      \`\`\`
+      <!-- prettier-ignore-end -->
       "
     `);
   });

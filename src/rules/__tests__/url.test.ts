@@ -24,6 +24,15 @@ describe("Link text is a URL", () => {
 
       When read aloud, users will hear “Introduction to Web Accessibility, link”.
 
+      Configuration:
+
+      <!-- prettier-ignore-start -->
+      \`\`\`js
+      // disable the rule:
+      [\\"@double-great/remark-lint-link-text\\", [1, {\\"url\\":false}]]
+      \`\`\`
+      <!-- prettier-ignore-end -->
+
       💡 This check is at odds with some stylistic guidelines, like APA. The [APA Style’s Accessible URLs page](https://apastyle.apa.org/style-grammar-guidelines/paper-format/accessibility/urls) provides some rationale for their guidelines as it relates to [WCAG 2.4.4](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=244#link-purpose-in-context).
       "
     `);

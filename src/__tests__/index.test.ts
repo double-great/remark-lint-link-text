@@ -62,6 +62,14 @@ describe("remark-lint-link-text", () => {
     `);
   });
 
+  test("warns against url as link text, config, disabled", async () => {
+    const lint = await processMarkdown(
+      dedent`A bad link: [https://example.com/initiatives/business/papers/important-ones.htm](https://example.com/initiatives/business/papers/important-ones.htm).`,
+      { "not-url": false }
+    );
+    expect(lint.messages).toMatchInlineSnapshot(`Array []`);
+  });
+
   test("the...documentation should pass", async () => {
     const lint = await processMarkdown(
       dedent`
@@ -95,6 +103,14 @@ describe("remark-lint-link-text", () => {
     `);
   });
 
+  test("unique link text, config. disabled", async () => {
+    const lint = await processMarkdown(
+      dedent`Visit the [staff directory](https://example.com/about-us/) to learn more. You can visit the other [staff directory](https://example.com/team/directory/) to learn other stuff.`,
+      { unique: false }
+    );
+    expect(lint.messages).toMatchInlineSnapshot(`Array []`);
+  });
+
   test("link with image", async () => {
     const lint = await processMarkdown(
       dedent`Visit the [staff directory ![](example.png)](https://example.com).`
@@ -111,6 +127,14 @@ describe("remark-lint-link-text", () => {
         [1:11-1:50: The link “https://example.com” must have link text or the image inside the link must have alt text (https://tinyurl.com/ycg5glhn)],
       ]
     `);
+  });
+
+  test("link is image, no alt text, config, disabled", async () => {
+    const lint = await processMarkdown(
+      dedent`Visit the [![](example.png)](https://example.com).`,
+      { "empty-alt-text": false }
+    );
+    expect(lint.messages).toMatchInlineSnapshot(`Array []`);
   });
 
   test("link is image, alt text", async () => {
@@ -167,5 +191,23 @@ describe("remark-lint-link-text", () => {
         [7:13-7:57: Avoid using the link text “the example blog post,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination. (https://tinyurl.com/ycafcwtx)],
       ]
     `);
+  });
+
+  test("empty", async () => {
+    const lint = await processMarkdown(
+      dedent`Visit the [](https://example.com).`
+    );
+    expect(lint.messages).toMatchInlineSnapshot(`
+      Array [
+        [1:11-1:34: The link “https://example.com” must have link text (https://tinyurl.com/y9qcopkq)],
+      ]
+    `);
+  });
+  test("empty, config, disabled", async () => {
+    const lint = await processMarkdown(
+      dedent`Visit the [](https://example.com).`,
+      { empty: false }
+    );
+    expect(lint.messages).toMatchInlineSnapshot(`Array []`);
   });
 });

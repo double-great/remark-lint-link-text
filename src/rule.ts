@@ -48,6 +48,7 @@ export default class Rule {
     nodes?: TextNode[];
     altText?: string;
     hasImage?: boolean;
+    config?: unknown;
   }): string | undefined {
     throw new Error("check() method not implemented.");
   }
@@ -61,6 +62,16 @@ export default class Rule {
   }
 
   document() {
+    const codeDisable = `["@double-great/remark-lint-link-text", [1, ${JSON.stringify(
+      {
+        [this.id]: false,
+      }
+    )}]]`;
+    const codeOptions = `["@double-great/remark-lint-link-text", [1, ${JSON.stringify(
+      {
+        [this.id]: this.config,
+      }
+    )}]]`;
     return `### ${this.heading}
 
 ${this.rationale}
@@ -72,6 +83,21 @@ ${this.notOk}
 ✅ The following markdown will _not_ cause a warning:
 
 ${this.ok}
+
+Configuration:
+
+<!-- prettier-ignore-start -->
+\`\`\`js
+// disable the rule:
+${codeDisable}${
+      this.config
+        ? `
+// adjust rule defaults:
+${codeOptions}`
+        : ""
+    }
+\`\`\`
+<!-- prettier-ignore-end -->
 ${
   this.note
     ? `

@@ -20,6 +20,15 @@ describe("Linked image is missing alt text", () => {
       [![Example logo](https://example.com/logo.svg)](https://example.com)
       \`\`\`
 
+      Configuration:
+
+      <!-- prettier-ignore-start -->
+      \`\`\`js
+      // disable the rule:
+      [\\"@double-great/remark-lint-link-text\\", [1, {\\"empty-alt-text\\":false}]]
+      \`\`\`
+      <!-- prettier-ignore-end -->
+
       💡 When an image is the only content in a link, the image’s alt text effectively becomes the link text. Based on [WCAG 2.4.4 Link Purpose (In Context) (A)](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=244#link-purpose-in-context), the alt text should describle the function of the link (instead of describing the image).
       "
     `);
