@@ -19,6 +19,13 @@ describe("Link text is missing", () => {
       \`\`\`md
       [Example](https://example.com)
       \`\`\`
+
+      Configuration:
+
+      \`\`\`js
+      // disable the rule:
+      [\\"@double-great/remark-lint-link-text\\", [1, { empty: false }]];
+      \`\`\`
       "
     `);
   });

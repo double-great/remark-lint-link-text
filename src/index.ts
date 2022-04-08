@@ -48,16 +48,23 @@ const checkLinkText = lintRule(
         .map(({ alt }) => alt)
         .join(" ");
 
-      if (config["empty"])
+      if (config["empty"]) {
         message(checkIsNotEmpty.check({ node, text, altText, hasImage }));
-      if (config["empty-alt-text"])
+      }
+      if (config["empty-alt-text"]) {
         message(checkIsNotEmptyNoAlt.check({ node, text, altText, hasImage }));
-      if (config["not-descriptive"])
+      }
+      if (config["not-descriptive"]) {
         message(
           checkNotDescriptive.check({ text, config: config["not-descriptive"] })
         );
-      if (config["not-url"]) message(checkIsNotUrl.check({ text }));
-      if (config["email"]) message(checkEmail.check({ node, text }));
+      }
+      if (config["not-url"]) {
+        message(checkIsNotUrl.check({ text }));
+      }
+      if (config["email"]) {
+        message(checkEmail.check({ node, text }));
+      }
 
       if (!textToNodes[text]) {
         textToNodes[text] = [];

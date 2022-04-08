@@ -87,7 +87,9 @@ ${this.notOk}
 ✅ The following markdown will _not_ cause a warning:
 
 ${this.ok}
+
 Configuration:
+
 \`\`\`js
 // disable the rule:
 ${codeDisable}${

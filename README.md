@@ -38,16 +38,7 @@ Add the plugin to your remark configuration:
 
 ### Link text is not descriptive
 
-Pulling from [this library’s list of bad link text](src/banned.ts), any link text that matches this list will be flagged. Using non-specific link text is a [failure of WCAG 2.4.9 (AAA)](https://www.w3.org/WAI/WCAG21/Techniques/failures/F84.html).
-
-Here’s a sample of the phrases in [`src/banned.ts`](src/banned.ts):
-
-- click here
-- read more
-- learn more
-- website
-- found here
-- this article
+Pulling from this library’s list of bad link text, any link text that matches this list will be flagged. Using non-specific link text is a [failure of WCAG 2.4.9 (AAA)](https://www.w3.org/WAI/WCAG21/Techniques/failures/F84.html).
 
 🚫 The following markdown will cause a warning:
 
@@ -166,6 +157,7 @@ When read aloud, users will hear “h t t p s colon slash slash w w w dot w 3 c 
 ```
 
 When read aloud, users will hear “Introduction to Web Accessibility, link”.
+
 Configuration:
 
 ```js

@@ -6,16 +6,7 @@ describe("Link text is not descriptive", () => {
     expect(descriptive.document()).toMatchInlineSnapshot(`
       "### Link text is not descriptive
 
-      Pulling from [this library’s list of bad link text](src/banned.ts), any link text that matches this list will be flagged. Using non-specific link text is a [failure of WCAG 2.4.9 (AAA)](https://www.w3.org/WAI/WCAG21/Techniques/failures/F84.html).
-
-      Here’s a sample of the phrases in [\`src/banned.ts\`](src/banned.ts):
-
-      - click here
-      - read more
-      - learn more
-      - website
-      - found here
-      - this article
+      Pulling from this library’s list of bad link text, any link text that matches this list will be flagged. Using non-specific link text is a [failure of WCAG 2.4.9 (AAA)](https://www.w3.org/WAI/WCAG21/Techniques/failures/F84.html).
 
       🚫 The following markdown will cause a warning:
 
@@ -27,6 +18,63 @@ describe("Link text is not descriptive", () => {
 
       \`\`\`md
       - [Example team](https://example.com/team)
+      \`\`\`
+
+      Configuration:
+
+      \`\`\`js
+      // disable the rule:
+      [\\"@double-great/remark-lint-link-text\\", [1, { \\"not-descriptive\\": false }]];
+
+      // adjust rule defaults:
+      [
+        \\"@double-great/remark-lint-link-text\\",
+        [
+          1,
+          {
+            \\"not-descriptive\\": [
+              \\"about\\",
+              \\"button\\",
+              \\"can be found here\\",
+              \\"click\\",
+              \\"click here\\",
+              \\"continue\\",
+              \\"continue reading\\",
+              \\"details\\",
+              \\"email\\",
+              \\"figure\\",
+              \\"found here\\",
+              \\"here\\",
+              \\"learn more\\",
+              \\"link\\",
+              \\"more\\",
+              \\"more details\\",
+              \\"more here\\",
+              \\"online\\",
+              \\"read more\\",
+              \\"resource\\",
+              \\"the article\\",
+              \\"the document\\",
+              \\"the entry\\",
+              \\"the link\\",
+              \\"the page\\",
+              \\"the post\\",
+              \\"the site\\",
+              \\"the website\\",
+              \\"this article\\",
+              \\"this document\\",
+              \\"this entry\\",
+              \\"this link\\",
+              \\"this page\\",
+              \\"this post\\",
+              \\"this site\\",
+              \\"this website\\",
+              \\"url\\",
+              \\"website\\",
+            ],
+          },
+        ],
+      ];
       \`\`\`
 
       💡 For all banned phrases that begin with \`this\` or \`the\`, any words that come between will also fail. For example “this post”, “this W3C post”, and “this W3C blog post” will all fail.
