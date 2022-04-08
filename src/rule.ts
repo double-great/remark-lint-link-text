@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Config, TextNode } from "./index.js";
+import pkg from "prettier";
+const { format } = pkg;
 
 export type RuleProps = {
   id: string;
@@ -34,7 +36,6 @@ export default class Rule {
     this.notOk = props.notOk;
     this.listen = props.listen;
     this.note = props.note;
-    //this.config = props.config;
   }
 
   check({
@@ -63,6 +64,18 @@ export default class Rule {
   }
 
   document() {
+    const codeDisable = format(
+      `["@double-great/remark-lint-link-text", [1, ${JSON.stringify({
+        [this.id]: false,
+      })}]]`,
+      { parser: "babel" }
+    );
+    const codeOptions = format(
+      `["@double-great/remark-lint-link-text", [1, ${JSON.stringify({
+        [this.id]: this.config,
+      })}]]`,
+      { parser: "babel" }
+    );
     return `### ${this.heading}
 
 ${this.rationale}
@@ -74,6 +87,16 @@ ${this.notOk}
 ✅ The following markdown will _not_ cause a warning:
 
 ${this.ok}
+Configuration:
+\`\`\`js
+// disable the rule:
+${codeDisable}${
+      this.config
+        ? `
+// adjust rule defaults:
+${codeOptions}`
+        : ""
+    }\`\`\`
 ${
   this.note
     ? `
