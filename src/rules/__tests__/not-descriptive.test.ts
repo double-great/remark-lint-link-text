@@ -22,60 +22,14 @@ describe("Link text is not descriptive", () => {
 
       Configuration:
 
+      <!-- prettier-ignore-start -->
       \`\`\`js
       // disable the rule:
-      [\\"@double-great/remark-lint-link-text\\", [1, { \\"not-descriptive\\": false }]];
-
+      [\\"@double-great/remark-lint-link-text\\", [1, {\\"not-descriptive\\":false}]]
       // adjust rule defaults:
-      [
-        \\"@double-great/remark-lint-link-text\\",
-        [
-          1,
-          {
-            \\"not-descriptive\\": [
-              \\"about\\",
-              \\"button\\",
-              \\"can be found here\\",
-              \\"click\\",
-              \\"click here\\",
-              \\"continue\\",
-              \\"continue reading\\",
-              \\"details\\",
-              \\"email\\",
-              \\"figure\\",
-              \\"found here\\",
-              \\"here\\",
-              \\"learn more\\",
-              \\"link\\",
-              \\"more\\",
-              \\"more details\\",
-              \\"more here\\",
-              \\"online\\",
-              \\"read more\\",
-              \\"resource\\",
-              \\"the article\\",
-              \\"the document\\",
-              \\"the entry\\",
-              \\"the link\\",
-              \\"the page\\",
-              \\"the post\\",
-              \\"the site\\",
-              \\"the website\\",
-              \\"this article\\",
-              \\"this document\\",
-              \\"this entry\\",
-              \\"this link\\",
-              \\"this page\\",
-              \\"this post\\",
-              \\"this site\\",
-              \\"this website\\",
-              \\"url\\",
-              \\"website\\",
-            ],
-          },
-        ],
-      ];
+      [\\"@double-great/remark-lint-link-text\\", [1, {\\"not-descriptive\\":[\\"about\\",\\"button\\",\\"can be found here\\",\\"click\\",\\"click here\\",\\"continue\\",\\"continue reading\\",\\"details\\",\\"email\\",\\"figure\\",\\"found here\\",\\"here\\",\\"learn more\\",\\"link\\",\\"more\\",\\"more details\\",\\"more here\\",\\"online\\",\\"read more\\",\\"resource\\",\\"the article\\",\\"the document\\",\\"the entry\\",\\"the link\\",\\"the page\\",\\"the post\\",\\"the site\\",\\"the website\\",\\"this article\\",\\"this document\\",\\"this entry\\",\\"this link\\",\\"this page\\",\\"this post\\",\\"this site\\",\\"this website\\",\\"url\\",\\"website\\"]}]]
       \`\`\`
+      <!-- prettier-ignore-end -->
 
       💡 For all banned phrases that begin with \`this\` or \`the\`, any words that come between will also fail. For example “this post”, “this W3C post”, and “this W3C blog post” will all fail.
       "

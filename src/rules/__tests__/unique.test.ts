@@ -24,10 +24,12 @@ describe("Link text is not unique", () => {
 
       Configuration:
 
+      <!-- prettier-ignore-start -->
       \`\`\`js
       // disable the rule:
-      [\\"@double-great/remark-lint-link-text\\", [1, { unique: false }]];
+      [\\"@double-great/remark-lint-link-text\\", [1, {\\"unique\\":false}]]
       \`\`\`
+      <!-- prettier-ignore-end -->
 
       💡 This check does not account for techniques that use \`aria-label\` or \`aria-labelledby\` attributes to provide additional link context. Context provided by content that surrounds the link, as allowed by [WCAG 2.4.4 Link Purpose (In Context) (A)](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=244#link-purpose-in-context), is not considered by this check.
       "

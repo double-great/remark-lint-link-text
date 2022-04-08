@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { TextNode } from "./index.js";
-import pkg from "prettier";
-const { format } = pkg;
 
 export type RuleProps = {
   id: string;
@@ -64,18 +62,16 @@ export default class Rule {
   }
 
   document() {
-    const codeDisable = format(
-      `["@double-great/remark-lint-link-text", [1, ${JSON.stringify({
+    const codeDisable = `["@double-great/remark-lint-link-text", [1, ${JSON.stringify(
+      {
         [this.id]: false,
-      })}]]`,
-      { parser: "babel" }
-    );
-    const codeOptions = format(
-      `["@double-great/remark-lint-link-text", [1, ${JSON.stringify({
+      }
+    )}]]`;
+    const codeOptions = `["@double-great/remark-lint-link-text", [1, ${JSON.stringify(
+      {
         [this.id]: this.config,
-      })}]]`,
-      { parser: "babel" }
-    );
+      }
+    )}]]`;
     return `### ${this.heading}
 
 ${this.rationale}
@@ -90,6 +86,7 @@ ${this.ok}
 
 Configuration:
 
+<!-- prettier-ignore-start -->
 \`\`\`js
 // disable the rule:
 ${codeDisable}${
@@ -98,7 +95,9 @@ ${codeDisable}${
 // adjust rule defaults:
 ${codeOptions}`
         : ""
-    }\`\`\`
+    }
+\`\`\`
+<!-- prettier-ignore-end -->
 ${
   this.note
     ? `

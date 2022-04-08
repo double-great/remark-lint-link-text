@@ -22,10 +22,12 @@ describe("Link text is missing", () => {
 
       Configuration:
 
+      <!-- prettier-ignore-start -->
       \`\`\`js
       // disable the rule:
-      [\\"@double-great/remark-lint-link-text\\", [1, { empty: false }]];
+      [\\"@double-great/remark-lint-link-text\\", [1, {\\"empty\\":false}]]
       \`\`\`
+      <!-- prettier-ignore-end -->
       "
     `);
   });

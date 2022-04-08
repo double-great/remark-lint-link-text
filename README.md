@@ -54,60 +54,14 @@ Pulling from this library’s list of bad link text, any link text that matches 
 
 Configuration:
 
+<!-- prettier-ignore-start -->
 ```js
 // disable the rule:
-["@double-great/remark-lint-link-text", [1, { "not-descriptive": false }]];
-
+["@double-great/remark-lint-link-text", [1, {"not-descriptive":false}]]
 // adjust rule defaults:
-[
-  "@double-great/remark-lint-link-text",
-  [
-    1,
-    {
-      "not-descriptive": [
-        "about",
-        "button",
-        "can be found here",
-        "click",
-        "click here",
-        "continue",
-        "continue reading",
-        "details",
-        "email",
-        "figure",
-        "found here",
-        "here",
-        "learn more",
-        "link",
-        "more",
-        "more details",
-        "more here",
-        "online",
-        "read more",
-        "resource",
-        "the article",
-        "the document",
-        "the entry",
-        "the link",
-        "the page",
-        "the post",
-        "the site",
-        "the website",
-        "this article",
-        "this document",
-        "this entry",
-        "this link",
-        "this page",
-        "this post",
-        "this site",
-        "this website",
-        "url",
-        "website",
-      ],
-    },
-  ],
-];
+["@double-great/remark-lint-link-text", [1, {"not-descriptive":["about","button","can be found here","click","click here","continue","continue reading","details","email","figure","found here","here","learn more","link","more","more details","more here","online","read more","resource","the article","the document","the entry","the link","the page","the post","the site","the website","this article","this document","this entry","this link","this page","this post","this site","this website","url","website"]}]]
 ```
+<!-- prettier-ignore-end -->
 
 💡 For all banned phrases that begin with `this` or `the`, any words that come between will also fail. For example “this post”, “this W3C post”, and “this W3C blog post” will all fail.
 
@@ -131,10 +85,12 @@ This warning relates to [WCAG 2.4.9 Link Purpose (Link Only) (AAA)](https://www.
 
 Configuration:
 
+<!-- prettier-ignore-start -->
 ```js
 // disable the rule:
-["@double-great/remark-lint-link-text", [1, { unique: false }]];
+["@double-great/remark-lint-link-text", [1, {"unique":false}]]
 ```
+<!-- prettier-ignore-end -->
 
 💡 This check does not account for techniques that use `aria-label` or `aria-labelledby` attributes to provide additional link context. Context provided by content that surrounds the link, as allowed by [WCAG 2.4.4 Link Purpose (In Context) (A)](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=244#link-purpose-in-context), is not considered by this check.
 
@@ -160,10 +116,12 @@ When read aloud, users will hear “Introduction to Web Accessibility, link”.
 
 Configuration:
 
+<!-- prettier-ignore-start -->
 ```js
 // disable the rule:
-["@double-great/remark-lint-link-text", [1, { url: false }]];
+["@double-great/remark-lint-link-text", [1, {"url":false}]]
 ```
+<!-- prettier-ignore-end -->
 
 💡 This check is at odds with some stylistic guidelines, like APA. The [APA Style’s Accessible URLs page](https://apastyle.apa.org/style-grammar-guidelines/paper-format/accessibility/urls) provides some rationale for their guidelines as it relates to [WCAG 2.4.4](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=244#link-purpose-in-context).
 
@@ -185,10 +143,12 @@ In markdown, missing link text is often an oversight. Although an [`<a>` element
 
 Configuration:
 
+<!-- prettier-ignore-start -->
 ```js
 // disable the rule:
-["@double-great/remark-lint-link-text", [1, { empty: false }]];
+["@double-great/remark-lint-link-text", [1, {"empty":false}]]
 ```
+<!-- prettier-ignore-end -->
 
 ### Linked image is missing alt text
 
@@ -208,10 +168,12 @@ When an image is the only content in a link, alt text is required. In this conte
 
 Configuration:
 
+<!-- prettier-ignore-start -->
 ```js
 // disable the rule:
-["@double-great/remark-lint-link-text", [1, { "empty-alt-text": false }]];
+["@double-great/remark-lint-link-text", [1, {"empty-alt-text":false}]]
 ```
+<!-- prettier-ignore-end -->
 
 💡 When an image is the only content in a link, the image’s alt text effectively becomes the link text. Based on [WCAG 2.4.4 Link Purpose (In Context) (A)](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=244#link-purpose-in-context), the alt text should describle the function of the link (instead of describing the image).
 
@@ -237,10 +199,12 @@ When linking to an email address, using `mailto:`, the email address should be i
 
 Configuration:
 
+<!-- prettier-ignore-start -->
 ```js
 // disable the rule:
-["@double-great/remark-lint-link-text", [1, { email: false }]];
+["@double-great/remark-lint-link-text", [1, {"email":false}]]
 ```
+<!-- prettier-ignore-end -->
 
 <!-- end generated content -->
 
