@@ -4,45 +4,9 @@ import Rule, { RuleProps } from "../rule.js";
 class CheckNotDescriptive extends Rule {
   constructor(props: RuleProps) {
     super(props);
+    // prettier-ignore
     this.config = [
-      "about",
-      "button",
-      "can be found here",
-      "click",
-      "click here",
-      "continue",
-      "continue reading",
-      "details",
-      "email",
-      "figure",
-      "found here",
-      "here",
-      "learn more",
-      "link",
-      "more",
-      "more details",
-      "more here",
-      "online",
-      "read more",
-      "resource",
-      "the article",
-      "the document",
-      "the entry",
-      "the link",
-      "the page",
-      "the post",
-      "the site",
-      "the website",
-      "this article",
-      "this document",
-      "this entry",
-      "this link",
-      "this page",
-      "this post",
-      "this site",
-      "this website",
-      "url",
-      "website",
+      "about", "button", "can be found here", "click", "click here", "continue", "continue reading", "details", "email", "figure", "found here", "here", "learn more", "link", "more", "more details", "more here", "online", "read more", "resource", "the article", "the document", "the entry", "the link", "the page", "the post", "the site", "the website", "this article", "this document", "this entry", "this link", "this page", "this post", "this site", "this website", "url", "website"
     ];
     this.recommendation = this.setRecommendation();
   }
