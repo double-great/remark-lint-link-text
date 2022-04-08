@@ -163,7 +163,11 @@ describe("remark-lint-link-text", () => {
       Good: [email@example.com](mailto:email@example.com)
     `
     );
-    expect(lint.messages).toMatchInlineSnapshot(`Array []`);
+    expect(lint.messages).toMatchInlineSnapshot(`
+      Array [
+        [1:6-1:42: Text must include email “email@example.com” because the link URL will generate an email message (https://tinyurl.com/y8aj6o83)],
+      ]
+    `);
   });
 
   test("warns against banned link text, regex match", async () => {

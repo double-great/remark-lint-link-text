@@ -28,6 +28,7 @@ const checkLinkText = lintRule(
       "empty-alt-text": true,
       "not-url": true,
       unique: true,
+      email: true,
       ...options,
     };
 
