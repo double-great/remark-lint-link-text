@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Config, TextNode } from "./index.js";
+import { TextNode } from "./index.js";
 import pkg from "prettier";
 const { format } = pkg;
 
