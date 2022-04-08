@@ -47,7 +47,7 @@ class CheckNotDescriptive extends Rule {
     this.recommendation = this.setRecommendation();
   }
 
-  check({ text, config }: { text: string; config: Config["banned-words"] }) {
+  check({ text, config }: { text: string; config: Config["not-descriptive"] }) {
     if (Array.isArray(config)) this.config = config;
 
     if (this.config.includes(text.toLowerCase())) {

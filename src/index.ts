@@ -9,7 +9,7 @@ import checkUniqueLinkText from "./rules/unique.js";
 import checkEmail from "./rules/email.js";
 
 export type Config = {
-  "banned-words": boolean | string[];
+  "not-descriptive": boolean | string[];
   empty: boolean;
   "empty-alt-text": boolean;
   "not-url": boolean;
@@ -23,7 +23,7 @@ const checkLinkText = lintRule(
     const textToNodes: { [text: string]: TextNode[] } = {};
 
     const config = {
-      "banned-words": true,
+      "not-descriptive": true,
       empty: true,
       "empty-alt-text": true,
       "not-url": true,
@@ -52,9 +52,9 @@ const checkLinkText = lintRule(
         message(checkIsNotEmpty.check({ node, text, altText, hasImage }));
       if (config["empty-alt-text"])
         message(checkIsNotEmptyNoAlt.check({ node, text, altText, hasImage }));
-      if (config["banned-words"])
+      if (config["not-descriptive"])
         message(
-          checkNotDescriptive.check({ text, config: config["banned-words"] })
+          checkNotDescriptive.check({ text, config: config["not-descriptive"] })
         );
       if (config["not-url"]) message(checkIsNotUrl.check({ text }));
       if (config["email"]) message(checkEmail.check({ node, text }));
