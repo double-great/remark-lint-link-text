@@ -22,7 +22,7 @@ class CheckUniqueLinkText extends Rule {
 const checkUniqueLinkText = new CheckUniqueLinkText({
   id: "unique",
   heading: "Link text is not unique",
-  docs: "https://tinyurl.com/y94y3t7p",
+  docs: "https://doublegreat.dev/remark-lint-link-text/#link-text-is-not-unique",
   rationale: `This warning relates to [WCAG 2.4.9 Link Purpose (Link Only) (AAA)](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=249#link-purpose-link-only) and [WCAG 3.2.4 Consistent Navigation (AA)](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=324#consistent-identification). Links with different purposes and destinations should have different link text. Descriptive link text communicates a link’s purpose even when the context is missing. A screen reader listing all of the links on a page is an example where the context would be missing.`,
   note: `This check does not account for techniques that use \`aria-label\` or \`aria-labelledby\` attributes to provide additional link context. Context provided by content that surrounds the link, as allowed by [WCAG 2.4.4 Link Purpose (In Context) (A)](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=244#link-purpose-in-context), is not considered by this check.`,
   notOk: `\`\`\`md

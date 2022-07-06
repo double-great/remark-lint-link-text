@@ -42,7 +42,7 @@ describe("Link to email does not contain email address in link text", () => {
         node: { url: "mailto:email@example.com" },
       })
     ).toMatchInlineSnapshot(
-      `"Text must include email “email@example.com” because the link URL will generate an email message (https://tinyurl.com/y8aj6o83)"`
+      `"Text must include email “email@example.com” because the link URL will generate an email message (https://doublegreat.dev/remark-lint-link-text/#link-to-email-does-not-contain-email-address-in-link-text)"`
     );
     expect(
       checkEmail.check({

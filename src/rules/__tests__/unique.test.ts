@@ -42,7 +42,7 @@ describe("Link text is not unique", () => {
         nodes: [{ url: "www.directory.com" }, { url: "www.my-directory.com" }],
       })
     ).toMatchInlineSnapshot(
-      `"The link text “Staff directory” is used more than once with different URLs. Change the link text to be unique to the URL. (https://tinyurl.com/y94y3t7p)"`
+      `"The link text “Staff directory” is used more than once with different URLs. Change the link text to be unique to the URL. (https://doublegreat.dev/remark-lint-link-text/#link-text-is-not-unique)"`
     );
     expect(
       unique.check({

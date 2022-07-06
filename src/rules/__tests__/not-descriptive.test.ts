@@ -41,14 +41,14 @@ describe("Link text is not descriptive", () => {
         text: "click here",
       })
     ).toMatchInlineSnapshot(
-      `"Avoid using the link text “click here,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination. (https://tinyurl.com/ycafcwtx)"`
+      `"Avoid using the link text “click here,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination. (https://doublegreat.dev/remark-lint-link-text/#link-text-is-not-descriptive)"`
     );
     expect(
       descriptive.check({
         text: "this cool article",
       })
     ).toMatchInlineSnapshot(
-      `"Avoid using the link text “this cool article,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination. (https://tinyurl.com/ycafcwtx)"`
+      `"Avoid using the link text “this cool article,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination. (https://doublegreat.dev/remark-lint-link-text/#link-text-is-not-descriptive)"`
     );
     expect(
       descriptive.check({

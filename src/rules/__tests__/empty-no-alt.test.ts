@@ -42,7 +42,7 @@ describe("Linked image is missing alt text", () => {
         hasImage: true,
       })
     ).toMatchInlineSnapshot(
-      `"The link “my-image.jpg” must have link text or the image inside the link must have alt text (https://tinyurl.com/ycg5glhn)"`
+      `"The link “my-image.jpg” must have link text or the image inside the link must have alt text (https://doublegreat.dev/remark-lint-link-text/#linked-image-is-missing-alt-text)"`
     );
     expect(
       emptyNoAlt.check({

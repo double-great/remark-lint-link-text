@@ -18,7 +18,6 @@
   "author": "@double-great",
   "license": "MIT",
   "dependencies": {
-    "tinyurl": "^1.1.7",
     "unified-lint-rule": "^2.1.1",
     "unist-util-visit": "^4.1.0"
   },
