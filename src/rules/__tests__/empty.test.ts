@@ -40,7 +40,7 @@ describe("Link text is missing", () => {
         hasImage: false,
       })
     ).toMatchInlineSnapshot(
-      `"The link “my-image.jpg” must have link text (https://tinyurl.com/y9qcopkq)"`
+      `"The link “my-image.jpg” must have link text (https://doublegreat.dev/remark-lint-link-text/#link-text-is-missing)"`
     );
     expect(
       empty.check({

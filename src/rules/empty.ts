@@ -32,7 +32,7 @@ class CheckIsNotEmpty extends Rule {
 const checkIsNotEmpty = new CheckIsNotEmpty({
   id: "empty",
   heading: "Link text is missing",
-  docs: "https://tinyurl.com/y9qcopkq",
+  docs: "https://doublegreat.dev/remark-lint-link-text/#link-text-is-missing",
   rationale: `In markdown, missing link text is often an oversight. Although an [\`<a>\` element without a \`href\` attribute is valid](https://html.spec.whatwg.org/#the-a-element) HTML, [WebAIM suggests that empty links can be very confusing](https://webaim.org/techniques/hypertext/link_text#empty_links) to keyboard and screen reader users and should be avoided completely.`,
   notOk: `\`\`\`md
 [](https://example.com)

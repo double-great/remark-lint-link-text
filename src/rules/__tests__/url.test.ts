@@ -43,7 +43,7 @@ describe("Link text is a URL", () => {
         text: "https://www.website.org",
       })
     ).toMatchInlineSnapshot(
-      `"Avoid using a URL “https://www.website.org” as the link text. Consider users who must speak it out loud and who must listen to a screen reader announce it. Replace it with a short description of the link’s destination. (https://tinyurl.com/yadzyhe5)"`
+      `"Avoid using a URL “https://www.website.org” as the link text. Consider users who must speak it out loud and who must listen to a screen reader announce it. Replace it with a short description of the link’s destination. (https://doublegreat.dev/remark-lint-link-text/#link-text-is-a-url)"`
     );
     expect(
       url.check({

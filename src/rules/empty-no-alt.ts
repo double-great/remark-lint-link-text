@@ -34,7 +34,7 @@ class CheckIsNotEmptyNoAlt extends Rule {
 const checkIsNotEmptyNoAlt = new CheckIsNotEmptyNoAlt({
   id: "empty-alt-text",
   heading: "Linked image is missing alt text",
-  docs: "https://tinyurl.com/ycg5glhn",
+  docs: "https://doublegreat.dev/remark-lint-link-text/#linked-image-is-missing-alt-text",
   rationale: `When an image is the only content in a link, alt text is required. In this context, missing alt text is a [failure of WCAG 2.4.4 (A), 2.4.9 (AAA), and 4.1.2 (A)](https://www.w3.org/WAI/WCAG21/Techniques/failures/F89).`,
   note: `When an image is the only content in a link, the image’s alt text effectively becomes the link text. Based on [WCAG 2.4.4 Link Purpose (In Context) (A)](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=244#link-purpose-in-context), the alt text should describle the function of the link (instead of describing the image).`,
   notOk: `\`\`\`md

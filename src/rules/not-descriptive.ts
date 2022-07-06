@@ -38,7 +38,7 @@ class CheckNotDescriptive extends Rule {
 const checkNotDescriptive = new CheckNotDescriptive({
   id: "not-descriptive",
   heading: "Link text is not descriptive",
-  docs: "https://tinyurl.com/ycafcwtx",
+  docs: "https://doublegreat.dev/remark-lint-link-text/#link-text-is-not-descriptive",
   rationale: `Pulling from this library’s list of bad link text, any link text that matches this list will be flagged. Using non-specific link text is a [failure of WCAG 2.4.9 (AAA)](https://www.w3.org/WAI/WCAG21/Techniques/failures/F84.html).`,
   note: `For all banned phrases that begin with \`this\` or \`the\`, any words that come between will also fail. For example “this post”, “this W3C post”, and “this W3C blog post” will all fail.`,
   notOk: `\`\`\`md
