@@ -25,7 +25,7 @@ describe("Linked image is missing alt text", () => {
       <!-- prettier-ignore-start -->
       \`\`\`js
       // disable the rule:
-      [\\"@double-great/remark-lint-link-text\\", [1, {\\"empty-alt-text\\":false}]]
+      ["@double-great/remark-lint-link-text", [1, {"empty-alt-text":false}]]
       \`\`\`
       <!-- prettier-ignore-end -->
 

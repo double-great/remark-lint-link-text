@@ -29,7 +29,7 @@ describe("Link to email does not contain email address in link text", () => {
       <!-- prettier-ignore-start -->
       \`\`\`js
       // disable the rule:
-      [\\"@double-great/remark-lint-link-text\\", [1, {\\"email\\":false}]]
+      ["@double-great/remark-lint-link-text", [1, {"email":false}]]
       \`\`\`
       <!-- prettier-ignore-end -->
       "
