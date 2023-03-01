@@ -19,7 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "unified-lint-rule": "^2.1.1",
-    "unist-util-visit": "^4.1.1"
+    "unist-util-visit": "^4.1.2"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.19.1",
