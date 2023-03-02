@@ -5,7 +5,7 @@ on:
 
 jobs:
   update:
-    name: Update dependencies
+    name: Update NPM dependencies
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.PUSH_TOKEN }}
@@ -24,7 +24,7 @@ jobs:
         run: npm install
       - name: Build site
         run: npm run test
-      - name: Remove git hooks
+      - name: Remove git hooks (Husky)
         run: rm -rf .git/hooks
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
