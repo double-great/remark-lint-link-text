@@ -40,9 +40,9 @@ describe("Linked image is missing alt text", () => {
         text: undefined,
         altText: undefined,
         hasImage: true,
-      })
+      }),
     ).toMatchInlineSnapshot(
-      `"The link “my-image.jpg” must have link text or the image inside the link must have alt text (https://doublegreat.dev/remark-lint-link-text/#linked-image-is-missing-alt-text)"`
+      `"The link “my-image.jpg” must have link text or the image inside the link must have alt text (https://doublegreat.dev/remark-lint-link-text/#linked-image-is-missing-alt-text)"`,
     );
     expect(
       emptyNoAlt.check({
@@ -50,13 +50,13 @@ describe("Linked image is missing alt text", () => {
         text: "",
         altText: "My alt text",
         hasImage: true,
-      })
+      }),
     ).toMatchInlineSnapshot(`undefined`);
   });
   it("`docs` matches generated GitHub `heading` link", async () => {
     expect.assertions(1);
     await expect(checkDocsLink(emptyNoAlt.heading)).resolves.toEqual(
-      emptyNoAlt.docs
+      emptyNoAlt.docs,
     );
   });
 });

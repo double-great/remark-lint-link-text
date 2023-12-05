@@ -57,7 +57,10 @@ const checkLinkText = lintRule(
       }
       if (config["not-descriptive"]) {
         message(
-          checkNotDescriptive.check({ text, config: config["not-descriptive"] })
+          checkNotDescriptive.check({
+            text,
+            config: config["not-descriptive"],
+          }),
         );
       }
       if (config["not-url"]) {
@@ -82,7 +85,7 @@ const checkLinkText = lintRule(
         if (notes) file.message(notes, nodes[0]);
       }
     }
-  }
+  },
 );
 
 export default checkLinkText;

@@ -26,7 +26,7 @@ describe("remark-lint-link-text", () => {
       A bad link: [click here](https://example.com).
 
       A bad link: [link](https://example.com)
-    `
+    `,
     );
     expect(lint.messages).toMatchInlineSnapshot(`
       [
@@ -42,7 +42,7 @@ describe("remark-lint-link-text", () => {
       # Title
 
       A bad link: [Click here](https://example.com).
-    `
+    `,
     );
     expect(lint.messages).toMatchInlineSnapshot(`
       [
@@ -53,7 +53,7 @@ describe("remark-lint-link-text", () => {
 
   test("warns against url as link text", async () => {
     const lint = await processMarkdown(
-      dedent`A bad link: [https://example.com/initiatives/business/papers/important-ones.htm](https://example.com/initiatives/business/papers/important-ones.htm).`
+      dedent`A bad link: [https://example.com/initiatives/business/papers/important-ones.htm](https://example.com/initiatives/business/papers/important-ones.htm).`,
     );
     expect(lint.messages).toMatchInlineSnapshot(`
       [
@@ -65,7 +65,7 @@ describe("remark-lint-link-text", () => {
   test("warns against url as link text, config, disabled", async () => {
     const lint = await processMarkdown(
       dedent`A bad link: [https://example.com/initiatives/business/papers/important-ones.htm](https://example.com/initiatives/business/papers/important-ones.htm).`,
-      { "not-url": false }
+      { "not-url": false },
     );
     expect(lint.messages).toMatchInlineSnapshot(`[]`);
   });
@@ -76,7 +76,7 @@ describe("remark-lint-link-text", () => {
       # Title
 
       A good link: [important business papers](https://example.com/initiatives/business/papers/important-ones.htm).
-    `
+    `,
     );
     expect(lint.messages.length).toEqual(0);
   });
@@ -87,14 +87,14 @@ describe("remark-lint-link-text", () => {
       ## Example 1
       
       In this example we link to [important business papers](https://example.com/initiatives/business/papers/important-ones.htm) for more information.
-    `
+    `,
     );
     expect(lint.messages.length).toEqual(0);
   });
 
   test("unique link text", async () => {
     const lint = await processMarkdown(
-      dedent`Visit the [staff directory](https://example.com/about-us/) to learn more. You can visit the other [staff directory](https://example.com/team/directory/) to learn other stuff.`
+      dedent`Visit the [staff directory](https://example.com/about-us/) to learn more. You can visit the other [staff directory](https://example.com/team/directory/) to learn other stuff.`,
     );
     expect(lint.messages).toMatchInlineSnapshot(`
       [
@@ -106,21 +106,21 @@ describe("remark-lint-link-text", () => {
   test("unique link text, config. disabled", async () => {
     const lint = await processMarkdown(
       dedent`Visit the [staff directory](https://example.com/about-us/) to learn more. You can visit the other [staff directory](https://example.com/team/directory/) to learn other stuff.`,
-      { unique: false }
+      { unique: false },
     );
     expect(lint.messages).toMatchInlineSnapshot(`[]`);
   });
 
   test("link with image", async () => {
     const lint = await processMarkdown(
-      dedent`Visit the [staff directory ![](example.png)](https://example.com).`
+      dedent`Visit the [staff directory ![](example.png)](https://example.com).`,
     );
     expect(lint.messages).toMatchInlineSnapshot(`[]`);
   });
 
   test("link is image, no alt text", async () => {
     const lint = await processMarkdown(
-      dedent`Visit the [![](example.png)](https://example.com).`
+      dedent`Visit the [![](example.png)](https://example.com).`,
     );
     expect(lint.messages).toMatchInlineSnapshot(`
       [
@@ -132,21 +132,21 @@ describe("remark-lint-link-text", () => {
   test("link is image, no alt text, config, disabled", async () => {
     const lint = await processMarkdown(
       dedent`Visit the [![](example.png)](https://example.com).`,
-      { "empty-alt-text": false }
+      { "empty-alt-text": false },
     );
     expect(lint.messages).toMatchInlineSnapshot(`[]`);
   });
 
   test("link is image, alt text", async () => {
     const lint = await processMarkdown(
-      dedent`Visit the [![staff directory](example.png)](https://example.com).`
+      dedent`Visit the [![staff directory](example.png)](https://example.com).`,
     );
     expect(lint.messages).toMatchInlineSnapshot(`[]`);
   });
 
   test("missing link text", async () => {
     const lint = await processMarkdown(
-      dedent`Visit the [](https://example.com).`
+      dedent`Visit the [](https://example.com).`,
     );
     expect(lint.messages).toMatchInlineSnapshot(`
       [
@@ -161,7 +161,7 @@ describe("remark-lint-link-text", () => {
       Bad: [Email me](mailto:email@example.com)
       Good: [otheremail@example.com](mailto:otheremail@example.com?subject=hey)
       Good: [email@example.com](mailto:email@example.com)
-    `
+    `,
     );
     expect(lint.messages).toMatchInlineSnapshot(`
       [
@@ -180,7 +180,7 @@ describe("remark-lint-link-text", () => {
       A bad link: [click here](https://example.com).
       A bad link: [this blog post](https://example.com).
       A bad link: [the example blog post](https://example.com).
-    `
+    `,
     );
     expect(lint.messages).toMatchInlineSnapshot(`
       [
@@ -195,7 +195,7 @@ describe("remark-lint-link-text", () => {
 
   test("empty", async () => {
     const lint = await processMarkdown(
-      dedent`Visit the [](https://example.com).`
+      dedent`Visit the [](https://example.com).`,
     );
     expect(lint.messages).toMatchInlineSnapshot(`
       [
@@ -206,7 +206,7 @@ describe("remark-lint-link-text", () => {
   test("empty, config, disabled", async () => {
     const lint = await processMarkdown(
       dedent`Visit the [](https://example.com).`,
-      { empty: false }
+      { empty: false },
     );
     expect(lint.messages).toMatchInlineSnapshot(`[]`);
   });

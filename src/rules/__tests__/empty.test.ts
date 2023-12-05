@@ -38,9 +38,9 @@ describe("Link text is missing", () => {
         text: undefined,
         altText: undefined,
         hasImage: false,
-      })
+      }),
     ).toMatchInlineSnapshot(
-      `"The link “my-image.jpg” must have link text (https://doublegreat.dev/remark-lint-link-text/#link-text-is-missing)"`
+      `"The link “my-image.jpg” must have link text (https://doublegreat.dev/remark-lint-link-text/#link-text-is-missing)"`,
     );
     expect(
       empty.check({
@@ -48,7 +48,7 @@ describe("Link text is missing", () => {
         text: "My image",
         altText: undefined,
         hasImage: false,
-      })
+      }),
     ).toMatchInlineSnapshot(`undefined`);
   });
   it("`docs` matches generated GitHub `heading` link", async () => {

@@ -39,39 +39,39 @@ describe("Link text is not descriptive", () => {
     expect(
       descriptive.check({
         text: "click here",
-      })
+      }),
     ).toMatchInlineSnapshot(
-      `"Avoid using the link text “click here,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination. (https://doublegreat.dev/remark-lint-link-text/#link-text-is-not-descriptive)"`
+      `"Avoid using the link text “click here,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination. (https://doublegreat.dev/remark-lint-link-text/#link-text-is-not-descriptive)"`,
     );
     expect(
       descriptive.check({
         text: "this cool article",
-      })
+      }),
     ).toMatchInlineSnapshot(
-      `"Avoid using the link text “this cool article,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination. (https://doublegreat.dev/remark-lint-link-text/#link-text-is-not-descriptive)"`
+      `"Avoid using the link text “this cool article,” it can be confusing when a screen reader reads it out of context. Replace it with a short description of the link’s destination. (https://doublegreat.dev/remark-lint-link-text/#link-text-is-not-descriptive)"`,
     );
     expect(
       descriptive.check({
         text: "Staff directory",
-      })
+      }),
     ).toMatchInlineSnapshot(`undefined`);
     expect(
       descriptive.check({
         text: "click here",
         config: ["more here"],
-      })
+      }),
     ).toMatchInlineSnapshot(`undefined`);
     expect(
       descriptive.check({
         text: "this cool article",
         config: ["more here"],
-      })
+      }),
     ).toMatchInlineSnapshot(`undefined`);
   });
   it("`docs` matches generated GitHub `heading` link", async () => {
     expect.assertions(1);
     await expect(checkDocsLink(descriptive.heading)).resolves.toEqual(
-      descriptive.docs
+      descriptive.docs,
     );
   });
 });
