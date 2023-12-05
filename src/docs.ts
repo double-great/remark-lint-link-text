@@ -26,7 +26,7 @@ export const formattedDocs = `## List of warnings
 ${allClues
   .map(
     (clue) =>
-      `- [${clue.heading} (\`${clue.id}\`)](#${slugger.slug(clue.heading)})`
+      `- [${clue.heading} (\`${clue.id}\`)](#${slugger.slug(clue.heading)})`,
   )
   .join("\n")}
 
@@ -49,7 +49,7 @@ export async function swapDocs() {
   return {
     currentDocs: readme,
     matchedDocs: readme.match(
-      /## List of warnings([\s\S]*)\n<!-- end generated content -->/g
+      /## List of warnings([\s\S]*)\n<!-- end generated content -->/g,
     ),
   };
 }

@@ -41,14 +41,14 @@ describe("Link text is a URL", () => {
     expect(
       url.check({
         text: "https://www.website.org",
-      })
+      }),
     ).toMatchInlineSnapshot(
-      `"Avoid using a URL “https://www.website.org” as the link text. Consider users who must speak it out loud and who must listen to a screen reader announce it. Replace it with a short description of the link’s destination. (https://doublegreat.dev/remark-lint-link-text/#link-text-is-a-url)"`
+      `"Avoid using a URL “https://www.website.org” as the link text. Consider users who must speak it out loud and who must listen to a screen reader announce it. Replace it with a short description of the link’s destination. (https://doublegreat.dev/remark-lint-link-text/#link-text-is-a-url)"`,
     );
     expect(
       url.check({
         text: "Staff directory",
-      })
+      }),
     ).toMatchInlineSnapshot(`undefined`);
   });
   it("`docs` matches generated GitHub `heading` link", async () => {

@@ -65,12 +65,12 @@ export default class Rule {
     const codeDisable = `["@double-great/remark-lint-link-text", [1, ${JSON.stringify(
       {
         [this.id]: false,
-      }
+      },
     )}]]`;
     const codeOptions = `["@double-great/remark-lint-link-text", [1, ${JSON.stringify(
       {
         [this.id]: this.config,
-      }
+      },
     )}]]`;
     return `### ${this.heading}
 

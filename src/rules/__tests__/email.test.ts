@@ -40,21 +40,21 @@ describe("Link to email does not contain email address in link text", () => {
       checkEmail.check({
         text: "email me",
         node: { url: "mailto:email@example.com" },
-      })
+      }),
     ).toMatchInlineSnapshot(
-      `"Text must include email “email@example.com” because the link URL will generate an email message (https://doublegreat.dev/remark-lint-link-text/#link-to-email-does-not-contain-email-address-in-link-text)"`
+      `"Text must include email “email@example.com” because the link URL will generate an email message (https://doublegreat.dev/remark-lint-link-text/#link-to-email-does-not-contain-email-address-in-link-text)"`,
     );
     expect(
       checkEmail.check({
         text: "email@example.com",
         node: { url: "mailto:email@example.com" },
-      })
+      }),
     ).toMatchInlineSnapshot(`undefined`);
   });
   it("`docs` matches generated GitHub `heading` link", async () => {
     expect.assertions(1);
     await expect(checkDocsLink(checkEmail.heading)).resolves.toEqual(
-      checkEmail.docs
+      checkEmail.docs,
     );
   });
 });
