@@ -16,6 +16,17 @@ describe("remark-lint-link-text", () => {
     expect(lint.messages.length).toEqual(0);
   });
 
+  test("works, random test cases", async () => {
+    const lint = await processMarkdown(dedent`
+1. [Bullet item](https://example.com) 
+
+A [\`code\`](https://example.com) and [\`another code\`](https://example.com) 
+
+- [**clues.js**](https://github.com/double-great/alt-text/blob/main/clues.js)
+    `);
+    expect(lint.messages.length).toEqual(0);
+  });
+
   test("warns against banned link text", async () => {
     const lint = await processMarkdown(
       dedent`

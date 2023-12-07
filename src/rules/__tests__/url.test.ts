@@ -29,7 +29,7 @@ describe("Link text is a URL", () => {
       <!-- prettier-ignore-start -->
       \`\`\`js
       // disable the rule:
-      ["@double-great/remark-lint-link-text", [1, {"url":false}]]
+      ["@double-great/remark-lint-link-text", [1, {"not-url":false}]]
       \`\`\`
       <!-- prettier-ignore-end -->
 

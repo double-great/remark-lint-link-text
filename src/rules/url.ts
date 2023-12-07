@@ -23,7 +23,7 @@ class CheckIsNotUrl extends Rule {
 }
 
 const checkIsNotUrl = new CheckIsNotUrl({
-  id: "url",
+  id: "not-url",
   heading: "Link text is a URL",
   docs: "https://doublegreat.dev/remark-lint-link-text/#link-text-is-a-url",
   rationale: `[WCAG 2.4.4 Link Purpose (In Context) (A)](https://www.w3.org/WAI/WCAG21/quickref/?showtechniques=244#link-purpose-in-context) considers a link containing text that gives a description of the information at that URL a sufficient technique. When a URL is the link text, screen readers have to listen while the reader pronounces every single character of a URL. Audibly, this is less descriptive and more time consuming to listen to than descriptive link text. [WebAIM’s Links and Hypertext page](https://webaim.org/techniques/hypertext/link_text) explains the challenges of [URLs as links](https://webaim.org/techniques/hypertext/link_text#urls).`,

@@ -37,6 +37,7 @@
     "github-slugger": "^2.0.0",
     "jest": "^29.7.0",
     "prettier": "^3.1.0",
+    "prettier-2": "npm:prettier@^2",
     "remark": "^15.0.1",
     "typescript": "^5.3.2"
   },
@@ -52,17 +53,5 @@
   "bugs": {
     "url": "https://github.com/double-great/remark-lint-link-text/issues"
   },
-  "homepage": "https://github.com/double-great/remark-lint-link-text#readme",
-  "jest": {
-    "clearMocks": true,
-    "transformIgnorePatterns": [
-      "!node_modules/"
-    ],
-    "moduleNameMapper": {
-      "^..?/rule.js$": "<rootDir>/src/rule.ts",
-      "^..?/docs.js$": "<rootDir>/src/docs.ts",
-      "^..?/utils.js$": "<rootDir>/src/rules/utils.ts",
-      "^..?/rules/(.*).js$": "<rootDir>/src/rules/$1.ts"
-    }
-  }
+  "homepage": "https://github.com/double-great/remark-lint-link-text#readme"
 }
