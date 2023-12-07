@@ -91,7 +91,7 @@ const checkLinkText = lintRule(
 export default checkLinkText;
 
 export type TextNode = {
-  type: "text" | "image";
+  type: "text" | "image" | "link";
   title: string | null;
   url?: string;
   alt?: string;

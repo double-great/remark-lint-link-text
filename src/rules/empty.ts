@@ -18,7 +18,9 @@ class CheckIsNotEmpty extends Rule {
     altText: string;
     hasImage: boolean;
   }) {
-    if (!text && !altText && !hasImage) {
+    const isEmptyLink =
+      node.type === "link" && !node.title && !node.children.length;
+    if (!text && !altText && !hasImage && isEmptyLink) {
       this.recommendation = this.setRecommendation(text, node);
       return this.suggestion();
     }

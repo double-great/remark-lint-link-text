@@ -16,6 +16,15 @@ describe("remark-lint-link-text", () => {
     expect(lint.messages.length).toEqual(0);
   });
 
+  test.only("works", async () => {
+    const lint = await processMarkdown(dedent`
+1. [Bullet item](https://example.com) 
+
+A [\`code\`](https://example.com) and [\`another code\`](https://example.com) 
+    `);
+    expect(lint.messages.length).toEqual(0);
+  });
+
   test("warns against banned link text", async () => {
     const lint = await processMarkdown(
       dedent`
