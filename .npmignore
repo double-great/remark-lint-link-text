@@ -1,7 +1,11 @@
 tsconfig.json
 babel.config.cjs
+jest.config.cjs
 .eslintrc.cjs
 .github
 __tests__
 .husky
 src
+.vscode
+.eslintignore
+.prettierrc
