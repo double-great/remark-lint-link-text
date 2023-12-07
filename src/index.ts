@@ -39,10 +39,17 @@ const checkLinkText = lintRule(
       const hasImage =
         node.children.filter(({ type }) => type === "image").length > 0;
 
-      const text = node.children
-        .filter(({ type }) => type === "text")
-        .map(({ value }) => value)
-        .join(" ");
+      // recursively return all values from node.children
+      const getText = (node: TextNode): string => {
+        if (node.value) {
+          return node.value;
+        } else if (node.children) {
+          return node.children.map(getText).join(" ");
+        }
+        return "";
+      };
+
+      const text = getText(node);
 
       const altText = node.children
         .filter(({ type }) => type === "image")
@@ -91,7 +98,7 @@ const checkLinkText = lintRule(
 export default checkLinkText;
 
 export type TextNode = {
-  type: "text" | "image" | "link";
+  type: "text" | "image";
   title: string | null;
   url?: string;
   alt?: string;

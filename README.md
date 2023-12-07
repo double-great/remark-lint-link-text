@@ -31,7 +31,7 @@ Add the plugin to your remark configuration:
 
 - [Link text is not descriptive (`not-descriptive`)](#link-text-is-not-descriptive)
 - [Link text is not unique (`unique`)](#link-text-is-not-unique)
-- [Link text is a URL (`url`)](#link-text-is-a-url)
+- [Link text is a URL (`not-url`)](#link-text-is-a-url)
 - [Link text is missing (`empty`)](#link-text-is-missing)
 - [Linked image is missing alt text (`empty-alt-text`)](#linked-image-is-missing-alt-text)
 - [Link to email does not contain email address in link text (`email`)](#link-to-email-does-not-contain-email-address-in-link-text)
@@ -119,7 +119,7 @@ Configuration:
 <!-- prettier-ignore-start -->
 ```js
 // disable the rule:
-["@double-great/remark-lint-link-text", [1, {"url":false}]]
+["@double-great/remark-lint-link-text", [1, {"not-url":false}]]
 ```
 <!-- prettier-ignore-end -->
 
