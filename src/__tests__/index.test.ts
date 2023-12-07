@@ -16,7 +16,7 @@ describe("remark-lint-link-text", () => {
     expect(lint.messages.length).toEqual(0);
   });
 
-  test.only("works", async () => {
+  test("works", async () => {
     const lint = await processMarkdown(dedent`
 1. [Bullet item](https://example.com) 
 
