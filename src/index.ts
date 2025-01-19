@@ -1,5 +1,4 @@
-import { lintRule } from "unified-lint-rule";
-import { VFile, Node } from "unified-lint-rule/lib";
+import { lintRule, Severity, Label } from "unified-lint-rule";
 import { visit } from "unist-util-visit";
 import checkIsNotEmptyNoAlt from "./rules/empty-no-alt.js";
 import checkIsNotEmpty from "./rules/empty.js";
@@ -7,6 +6,10 @@ import checkNotDescriptive from "./rules/not-descriptive.js";
 import checkIsNotUrl from "./rules/url.js";
 import checkUniqueLinkText from "./rules/unique.js";
 import checkEmail from "./rules/email.js";
+import { Node } from "unist";
+import { VFile } from "vfile";
+import { VFileMessage } from "vfile-message";
+import { TransformCallback } from "unified";
 
 export type Config = {
   "not-descriptive": boolean | string[];
@@ -17,8 +20,11 @@ export type Config = {
   email: boolean;
 };
 
-const checkLinkText = lintRule(
-  "remark-lint:link-text",
+const checkLinkText: Plugin = lintRule(
+  {
+    origin: "remark-lint:link-text",
+    url: "https://github.com/double-great/remark-lint-link-text",
+  },
   (tree: Node, file: VFile, options?: Config): void => {
     const textToNodes: { [text: string]: TextNode[] } = {};
 
@@ -33,8 +39,11 @@ const checkLinkText = lintRule(
     };
 
     const aggregate = (node: TextNode) => {
-      const message = (message: string | undefined) =>
-        message ? file.message(message, node) : "";
+      function message(message: string | undefined) {
+        if (!message) return;
+        const origin = "remark-lint:link-text";
+        file.message(new VFileMessage(message), node.position, origin);
+      }
 
       const hasImage =
         node.children.filter(({ type }) => type === "image").length > 0;
@@ -103,6 +112,21 @@ export type TextNode = {
   url?: string;
   alt?: string;
   value: string | undefined;
-  position: number[];
+  position: {
+    start: { line: number; column: number; offset?: number };
+    end: { line: number; column: number; offset?: number };
+    indent?: number[];
+  };
   children: TextNode[];
 };
+
+type Plugin = (
+  config?:
+    | Label
+    | Severity
+    | Config
+    | [level: Label | Severity, option?: Config | undefined]
+    | undefined,
+) =>
+  | ((tree: Node, file: VFile, next: TransformCallback) => undefined)
+  | undefined;
